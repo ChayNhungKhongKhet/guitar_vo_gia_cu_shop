@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #bebebe;
+        stroke-width: 1.2px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Rounded_Rectangle_523_copy_9" data-name="Rounded Rectangle 523 copy 9" class="cls-1" d="M2,0H4A2,2,0,0,1,6,2V4A2,2,0,0,1,4,6H2A2,2,0,0,1,0,4V2A2,2,0,0,1,2,0ZM20,22H10a2,2,0,0,1-2-2V18a2,2,0,0,1,2-2H20a2,2,0,0,1,2,2v2A2,2,0,0,1,20,22Zm0-8H10a2,2,0,0,1-2-2V10a2,2,0,0,1,2-2H20a2,2,0,0,1,2,2v2A2,2,0,0,1,20,14Zm0-8H10A2,2,0,0,1,8,4V2a2,2,0,0,1,2-2H20a2,2,0,0,1,2,2V4A2,2,0,0,1,20,6ZM2,8H4a2,2,0,0,1,2,2v2a2,2,0,0,1-2,2H2a2,2,0,0,1-2-2V10A2,2,0,0,1,2,8Zm0,8H4a2,2,0,0,1,2,2v2a2,2,0,0,1-2,2H2a2,2,0,0,1-2-2V18A2,2,0,0,1,2,16Z"/>
+</svg>
