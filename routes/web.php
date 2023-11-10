@@ -37,3 +37,26 @@ Route::get('/contact', function () {
 Route::get('/product', function () {
     return view('user.product');
 });
+
+//admin
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::get('/product', function () {
+        return view('admin.product');
+    });
+
+    Route::get('/addproduct', function () {
+        return view('admin.addproduct');
+    });
+
+    Route::get('/account', function () {
+        return view('admin.account');
+    });
+
+    Route::get('/addaccount', function () {
+        return view('admin.addaccount');
+    });
+});
