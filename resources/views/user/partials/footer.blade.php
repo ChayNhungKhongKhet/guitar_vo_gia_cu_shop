@@ -1,3 +1,31 @@
+{{-- <style>
+    .form-login{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+    }
+    .background{
+        width: 100%;
+        height: 100%;
+        background: green;
+        z-index: -1;
+    }
+    .content{
+        width: 500px;
+        height: 600px;
+        background: blue;
+        z-index: 999;
+        position: absolute;
+        top: 50%;
+        transform: translateX(-50%); 
+        left: 50%;
+    }
+    .body-login{
+        position: relative;
+    }
+</style> --}}
 <section>
             <div class="pe_footer_wrapper">
                 <div class="container">
@@ -139,3 +167,36 @@
                 </div>
             </div>
         </section>
+{{-- <div class="form-login">
+    <div class="body-login">
+        <div class="background">
+
+        </div>
+        <div class="content">
+            <h3 class="text-center mb-3 font-time"> LOGIN </h3>
+            <form>
+                <div class="form-group">
+                    <input type="text" name="username" id="username" class="form-control rounded-pill"
+                        placeholder="Enter Your Username" />
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="password" id="password" class="form-control rounded-pill"
+                        placeholder="Enter Your Password" />
+                </div>
+
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <label class="custom-control-label" for="customCheck">Remember Me</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-block btn-info rounded-pill" id="submit"
+                    onclick="return validate();">Login</button>
+
+            </form>
+        </div>
+    </div>
+   
+</div> --}}
