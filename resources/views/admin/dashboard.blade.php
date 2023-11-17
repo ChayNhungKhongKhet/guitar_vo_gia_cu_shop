@@ -2,7 +2,7 @@
 @section('content')
 
 <head>
-
+    <link rel="stylesheet" href="css/admin.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {
@@ -25,19 +25,16 @@
                 legend: {
                     position: 'none'
                 },
-                chart: {
-                    title: 'Biểu đồ số đơn hàng ',
-                },
+                chart: {},
                 axes: {
                     x: {
                         0: {
                             // side: 'top',
-
                         } // Top x-axis.
                     }
                 },
                 bar: {
-                    groupWidth: "90%"
+                    groupWidth: "50%"
                 }
             };
 
@@ -49,6 +46,14 @@
 </head>
 
 <body>
+    <div>
+        <p>Biểu đồ số đơn hàng</p>
+        <select>
+            <option value="1">HTML</option>
+            <option value="2">CSS</option>
+            <option value="3">Javascript</option>
+        </select>
+    </div>
     <div id="top_x_div" style="margin:50px ; width: 800px; height: 600px;"></div>
 </body>
 @endsection
