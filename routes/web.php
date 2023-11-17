@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,15 +38,16 @@ Route::get('/product', function () {
     return view('user.product');
 });
 
+
 //admin
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('/', [AdminController::class, 'show'])->name('admin.show');
+
 
     Route::get('/product', function () {
         return view('admin.product');
     });
+    Route::get('/con', [AdminController::class, 'show'])->name('admin.show');
 
     Route::get('/addproduct', function () {
         return view('admin.addproduct');
