@@ -14,9 +14,9 @@ class AdminController extends Controller
             ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y-%m")'))
             ->orderBy('order_month')
             ->get();
-        $dataMonth[] = [];
+        $dataMonth[] = ['Month','Total'];
         foreach ($ordersByMonth as $i => $value) {
-            $dataMonth[$i] = [$value->order_month, $value->order_count];
+            $dataMonth[++$i] = [$value->order_month, $value->order_count];
         }
 
         //query total oders in a quarter
@@ -27,10 +27,10 @@ class AdminController extends Controller
             ->orderBy('Quarter')
             ->get();
 
-        $dataQuarter[] = [];
+        $dataQuarter[] = ['Quarter','Total'];
         foreach ($ordersByQuarter as $i => $value) {
             $quarter = (string)$value->Quarter . "-" . (string)$value->Year;
-            $dataQuarter[$i] = [$quarter, $value->OrderCount];
+            $dataQuarter[++$i] = [$quarter, $value->OrderCount];
         }
 
         //query total orders in a year
@@ -38,9 +38,9 @@ class AdminController extends Controller
             ->groupBy(DB::raw('DATE_FORMAT(created_at, "%Y")'))
             ->orderBy('order_month')
             ->get();
-        $dataYear[] = [];
+        $dataYear[] = ['Year','Total'];
         foreach ($ordersByYear as $i => $value) {
-            $dataYear[$i] = [$value->order_month, $value->order_count];
+            $dataYear[++$i] = [$value->order_month, $value->order_count];
         }
         return view('admin.dashboard', ['datamonth' => $dataMonth,'dataquarter' => $dataQuarter,'datayear' => $dataYear]);
     }
