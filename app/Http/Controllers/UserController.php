@@ -56,4 +56,91 @@ class UserController extends Controller
     // public function logout(){
 
     // }
+
+    public function index()
+    {
+        $users = User::paginate(10);
+        // dd($users);
+        return view('admin.account.index', compact('users'));
+    }
+
+    public function create()
+    {
+        return view('admin.account.create');
+    }
+
+    public function store(Request $request)
+    {
+         $request->validate([
+            'username' => 'required|unique:users',
+            'password' => 'required',
+            'name' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'birthday' => 'required',
+            
+        ]);
+
+        $gender = $request->input('gender') === 'Male' ? 0 : 1;
+
+        User::create([
+            'username' => $request->input('username'),
+            //băm mật khẩu
+            // 'password' => Hash::make($request->input('password')),
+            'password' => $request->input('password'),
+            'name' => $request->input('name'),
+            'gender' => $gender,
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email'),
+            'birthday' => $request->input('birthday'),
+        ]);
+
+        return redirect()->route('account.index')->with('success', 'User created successfully.');
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.account.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'username' => 'required|unique:users,username,'.$id,
+            'password' => 'nullable', // Để tránh cập nhật mật khẩu mỗi khi chỉnh sửa
+            'name' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'birthday' => 'required|date',
+        ]);
+        
+        $user = User::findOrFail($id);
+        $gender =  $validatedData['gender'] === 'Male' ? 0 : 1;
+
+        
+        $user->update([
+            'username' => $validatedData['username'],
+            'name' => $validatedData['name'],
+            'gender' => $gender,
+            'address' => $validatedData['address'],
+            'phone' => $validatedData['phone'],
+            'email' => $validatedData['email'],
+            'birthday' => $validatedData['birthday'],
+        ]);
+
+        return redirect()->route('account.index', $id)->with('success', 'Account updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('account.index')->with('success', 'Account deleted successfully!');
+    }
 }

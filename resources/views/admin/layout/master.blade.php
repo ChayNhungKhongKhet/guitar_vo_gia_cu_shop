@@ -55,20 +55,8 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="{{ url('/admin') }}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                        <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>ProductManager</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ url('/admin/product') }}" class="dropdown-item">All product</a>
-                            <a href="{{ url('/admin/addproduct') }}" class="dropdown-item">Add product</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>AccountManager</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ url('/admin/account') }}" class="dropdown-item">All Account</a>
-                            <a href="{{ url('/admin/addaccount') }}" class="dropdown-item">Add account</a>
-                        </div>
-                    </div>
+                    <a href="{{ url('/admin/product') }}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Product</a>
+                    <a href="{{ url('/admin/account') }}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Account</a>
                 </div>
             </nav>
         </div>
@@ -169,20 +157,7 @@
 
             @yield('content')
 
-            <!-- Footer Start -->
-            <!-- <div class="container-fluid pt-4 px-4">
-                <div class="bg-light rounded-top p-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-6 text-center text-sm-start">
-                            &copy; <a href="#">Your Site Name</a>, All Right Reserved.
-                        </div>
-                        <div class="col-12 col-sm-6 text-center text-sm-end">
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- Footer End -->
+            
         </div>
         <!-- Content End -->
 

@@ -39,13 +39,12 @@ Route::group(['prefix' => 'admin'], function () {
         return view('admin.addproduct');
     });
 
-    Route::get('/account', function () {
-        return view('admin.account');
-    });
-
-    Route::get('/addaccount', function () {
-        return view('admin.addaccount');
-    });
+    Route::get('/account', [UserController::class, 'index'])->name('account.index');
+    Route::get('/account/create', [UserController::class, 'create'])->name('account.create');
+    Route::post('/account', [UserController::class, 'store'])->name('account.store');
+    Route::get('/account/edit/{id}', [UserController::class, 'edit'])->name('account.edit');
+    Route::put('/account/update/{id}', [UserController::class, 'update'])->name('account.update');
+    Route::delete('/account/delete/{id}', [UserController::class, 'destroy'])->name('account.destroy');
 });
 Route::get('/login', function () {
     return view('auth.login');
@@ -53,9 +52,9 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return redirect(route('home'));
 });
-Route::get('/admin', function () {
-    return view('auth.admin-home');
-});
+// Route::get('/admin', function () {
+//     return view('auth.admin-home');
+// });
 Route::post('/loginPost', [UserController::class, 'login']);
 Route::post('/signupPost', [UserController::class,'signup']);
 Route::get('/logout', [UserController::class,'logout']);
