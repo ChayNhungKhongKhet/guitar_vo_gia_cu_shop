@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class UserController extends Controller
 {
     public function showSignup(){
-        return view('home');
+        return view('user.home');
     }
     public function showLogin(){
         return view('auth.login');
