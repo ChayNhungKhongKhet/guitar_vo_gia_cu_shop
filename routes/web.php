@@ -24,35 +24,8 @@ Route::get('/contact', function () {
 Route::get('/product', function () {
     return view('user.product');
 });
-
-//admin
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    });
-
-    Route::get('/product', function () {
-        return view('admin.product');
-    });
-
-    Route::get('/addproduct', function () {
-        return view('admin.addproduct');
-    });
-
-    Route::get('/account', function () {
-        return view('admin.account');
-    });
-
-    Route::get('/addaccount', function () {
-        return view('admin.addaccount');
-    });
-});
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::get('/signup', function () {
-    return redirect(route('home'));
-});
+Route::get('/login', [UserController::class,'showLogin'])-> name('login');
+Route::get('/signup', [UserController::class,'showSignup'])->name('signup');
 Route::get('/admin', function () {
     return view('auth.admin-home');
 });
