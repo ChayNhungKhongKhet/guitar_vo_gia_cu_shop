@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers; 
+namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -23,12 +23,12 @@ class UserController extends Controller
        if (Hash::check($request->password, $user->password)) {
         // Update session with user information
             auth()->login($user);
-    
+
         // Continue with your existing logic
         if ($user->is_Admin == 0) {
             return redirect('/admin');
         } else {
-            return redirect(route('home', ['username' => $user->username]));
+            return redirect(route('home'));
         }
     } else {
         return back()->with('fail', 'The password does not match');
