@@ -5,10 +5,36 @@
     <link rel="stylesheet" href="css/admin.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
         google.charts.load('current', {
             'packages': ['bar']
         });
-        google.charts.setOnLoadCallback(drawStuff);
+        google.charts.setOnLoadCallback(drawChart);
+         //Pie chart
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Work', 11],
+                ['Eat', 2],
+                ['Commute', 2],
+                ['Watch TV', 2],
+                ['Sleep', 7]
+            ]);
+
+            var options = {
+                title: 'My Daily Activities'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+        //column chart
+        // Funtion select chart month, quarter or year
 
         function selectChart() {
             var period = 'Month',
@@ -17,6 +43,8 @@
                 i = 0,
                 dataRequestGGChart,
                 selectedValue = document.getElementById('timePeriod').value;
+
+            //Only select value 2 or 3
             if (selectedValue == '2' || selectedValue == '3') {
                 if (selectedValue == '2') {
                     x = [];
@@ -71,6 +99,7 @@
             }
         }
 
+        //Funtion get data for chart month
         function getDataChartMonth() {
             var period = 'Month',
                 dataPeriod,
@@ -110,17 +139,22 @@
     </script>
 </head>
 
-<body onload="getDataChartMonth()">
+<body onload="getDataChartMonth(),drawChart()">
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+
     <div>
         Biểu đồ tổng số đơn hàng theo
         <select id='timePeriod' onchange="selectChart()">
-            <option value="1">thang</option>
-            <option value="2">quy</option>
-            <option value="3">nam</option>
+            <option value="1">Month</option>
+            <option value="2">Quarter</option>
+            <option value="3">Year</option>
         </select>
     </div>
     <?php
     ?>
+
     <div id="top_x_div" class="chartColumn" style="margin:10px 50px ; width: 800px; height: 600px;"></div>
+    tien
+
 </body>
 @endsection

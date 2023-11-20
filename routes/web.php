@@ -41,13 +41,12 @@ Route::get('/product', function () {
 
 //admin
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', [AdminController::class, 'show'])->name('admin.show');
+    Route::get('/', [AdminController::class, 'showData'])->name('admin.show');
 
 
     Route::get('/product', function () {
         return view('admin.product');
     });
-    Route::get('/con', [AdminController::class, 'show'])->name('admin.show');
 
     Route::get('/addproduct', function () {
         return view('admin.addproduct');

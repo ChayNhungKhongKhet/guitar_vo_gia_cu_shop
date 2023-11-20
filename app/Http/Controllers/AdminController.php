@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function show()
+    public function showData()
     {
         //query total orders in a month
         $ordersByMonth = DB::table('Order_item')->selectRaw('COUNT(*) as order_count, DATE_FORMAT(created_at, "%Y-%m") as order_month')
