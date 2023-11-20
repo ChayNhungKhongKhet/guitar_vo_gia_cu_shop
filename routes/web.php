@@ -24,12 +24,8 @@ Route::get('/contact', function () {
 Route::get('/product', function () {
     return view('user.product');
 });
-Route::get('/login', function () {
-    return view('auth.login');
-});
-Route::get('/signup', function () {
-    return redirect(route('home'));
-});
+Route::get('/login', [UserController::class,'showLogin'])-> name('login');
+Route::get('/signup', [UserController::class,'showSignup'])->name('signup');
 Route::get('/admin', function () {
     return view('auth.admin-home');
 });

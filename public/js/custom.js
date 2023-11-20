@@ -43,6 +43,7 @@ Assigned to: Theme Forest
 			this.LoginFormClick();
 			this.categoryList();
 			this.productzoom();
+			this.LogoutFormClick();
 			
 		},
 
@@ -110,6 +111,16 @@ Assigned to: Theme Forest
                   });
                   $("#show").click(function(){
                     $(".pe_user_form").show();
+                  });
+                });
+		},
+		LogoutFormClick: function () {
+			$(document).ready(function(){
+                  $("#hide").click(function(){
+                    $(".pe_user_form_login").hide();
+                  });
+                  $("#show").click(function(){
+                    $(".pe_user_form_login").show();
                   });
                 });
 		},

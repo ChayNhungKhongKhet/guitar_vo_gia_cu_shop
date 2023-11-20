@@ -3,6 +3,7 @@
 namespace App\Http\Controllers; 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Session\Session;
 class UserController extends Controller
@@ -11,7 +12,7 @@ class UserController extends Controller
         return view('home');
     }
     public function showLogin(){
-        return view('login');
+        return view('auth.login');
     }
     public function login(Request $request){
         $request -> validate([
@@ -19,20 +20,18 @@ class UserController extends Controller
             'password' => "required"
        ]);
        $user = User::where('username','=', $request->username)->first();
-       if ($user) {
-        if (Hash::check($request->password, $user->password)) {
-            $request->session()->put('remember_token', $user->remember_token);
-            //check account admin
-            if ($user->is_Admin == 0) {
-                return redirect('/admin');
-            } else {
-                return redirect(route('home', ['username' => $user->username]));
-            }
+       if (Hash::check($request->password, $user->password)) {
+        // Update session with user information
+            auth()->login($user);
+    
+        // Continue with your existing logic
+        if ($user->is_Admin == 0) {
+            return redirect('/admin');
         } else {
-            return back()->with('fail', 'The password does not match');
+            return redirect(route('home', ['username' => $user->username]));
         }
     } else {
-        return back()->with('fail', 'The username is not registered');
+        return back()->with('fail', 'The password does not match');
     }
     }
     public function signup(Request $request){
@@ -53,7 +52,10 @@ class UserController extends Controller
             return back()-> with('fail','Something wrong');
        }
     }
-    // public function logout(){
-
-    // }
+    public function logout(){
+        if(Auth::logout()){
+            return redirect(route('login'));
+        }
+        return redirect(route('home'));
+    }
 }
