@@ -27,7 +27,7 @@ Route::get('/product', function () {
 Route::get('/login', [UserController::class,'showLogin'])-> name('login');
 Route::get('/signup', [UserController::class,'showSignup'])->name('signup');
 Route::get('/admin', function () {
-    return view('auth.admin-home');
+    return view('admin.dashboard');
 });
 Route::post('/loginPost', [UserController::class, 'login']);
 Route::post('/signupPost', [UserController::class,'signup']);
