@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
@@ -31,13 +33,12 @@ Route::group(['prefix' => 'admin'], function () {
         return view('admin.dashboard');
     });
 
-    Route::get('/product', function () {
-        return view('admin.product');
-    });
+    
 
-    Route::get('/addproduct', function () {
-        return view('admin.addproduct');
-    });
+    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+    Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/product', [ProductController::class, 'store'])->name('product.store');
 
     Route::get('/account', [UserController::class, 'index'])->name('account.index')->middleware('auth');;
     Route::get('/account/create', [UserController::class, 'create'])->name('account.create')->middleware('auth');;
