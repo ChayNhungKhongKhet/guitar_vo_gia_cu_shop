@@ -1,14 +1,13 @@
 @extends('user.layout.master')
 @section('content')
 <div class="container">
-<h2>Edit Profile</h2>
 
 @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
 @endif
-<form action="{{ route('profile.edit_profile', $user->id) }}" method="post">
+<form action="{{ route('profile.update_profile', $user->id) }}" method="post">
 @csrf
 @method('PUT')
     <div class="card-header">						
@@ -17,11 +16,11 @@
     <div class="card-body">					
         <div class="form-group">
             <label for="username">UserName</label>
-            <input name="username" type="text" class="form-control" value="{{$user->username }}" required>
+            <input name="username" type="text" class="form-control" value="{{$user->username }}" disabled required>
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input name="password" type="password" class="form-control" value="{{ $user->password }}" disabled required>
+            <!-- <label for="password">Password</label> -->
+            <input hidden name="password" type="password" class="form-control" value="{{ $user->password }}" disabled required>
         </div>
         <div class="form-group">
             <label for="name">Name</label>
@@ -31,8 +30,8 @@
             <label for="gender">Gender</label>
             <select name="gender" class="form-select">
                 <option selected>--Choose gender--</option>
-                <option value="Male" {{$user->gender === 0 ? 'selected' : ''}}>Male</option>
-                <option value="Female" {{$user->gender === 1 ? 'selected' : ''}}>Female</option>
+                <option value="0" {{$user->gender === 0 ? 'selected' : ''}}>Male</option>
+                <option value="1" {{$user->gender === 1 ? 'selected' : ''}}>Female</option>
             </select>
         </div>
             

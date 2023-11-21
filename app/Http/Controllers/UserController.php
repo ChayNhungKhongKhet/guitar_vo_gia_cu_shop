@@ -27,7 +27,7 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             // Nếu đăng nhập thành công, kiểm tra nếu người dùng là admin
-            if (Auth::user()->is_admin) {
+            if (Auth::user()->is_Admin == 0) {
                 return redirect('/admin');
             } else {
                 return redirect(route('home'));
@@ -194,29 +194,36 @@ class UserController extends Controller
         return redirect()->route('profile.change-password')->with('success', 'Password updated successfully');
     }
 
-    //  public function edit()
-    // {
-    //     $user = Auth::user();
-    //     return view('user.edit_profile', compact('user'));
-    // }
+     public function editProfile()
+    {
+        $user = Auth::user();
+        return view('user.edit_profile', compact('user'));
+    }
 
-    // public function update(Request $request)
-    // {
-    //     $user = Auth::user();
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
 
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-    //         // Thêm các quy tắc xác thực cho các trường khác nếu cần
-    //     ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'gender' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'birthday' => 'required|date',
+            // Thêm các quy tắc xác thực cho các trường khác nếu cần
+        ]);
 
-    //     // Cập nhật thông tin cá nhân của người dùng
-    //     $user->update([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         // Cập nhật các trường dữ liệu khác tương ứng trong bảng người dùng
-    //     ]);
+        // Cập nhật thông tin cá nhân của người dùng
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'gender' => $request->gender,
+            'address' =>$request->address,
+            'phone' => $request->phone,
+            'birthday' => $request->birthday,
+        ]);
 
-    //     return redirect()->route('profile.edit')->with('success', 'Profile updated successfully');
-    // }
+        return redirect(route('profile.edit_profile'))->with('success', 'Profile updated successfully');
+    }
 }

@@ -39,12 +39,12 @@ Route::group(['prefix' => 'admin'], function () {
         return view('admin.addproduct');
     });
 
-    Route::get('/account', [UserController::class, 'index'])->name('account.index');
-    Route::get('/account/create', [UserController::class, 'create'])->name('account.create');
-    Route::post('/account', [UserController::class, 'store'])->name('account.store');
-    Route::get('/account/edit/{id}', [UserController::class, 'edit'])->name('account.edit');
-    Route::put('/account/update/{id}', [UserController::class, 'update'])->name('account.update');
-    Route::delete('/account/delete/{id}', [UserController::class, 'destroy'])->name('account.destroy');
+    Route::get('/account', [UserController::class, 'index'])->name('account.index')->middleware('auth');;
+    Route::get('/account/create', [UserController::class, 'create'])->name('account.create')->middleware('auth');;
+    Route::post('/account', [UserController::class, 'store'])->name('account.store')->middleware('auth');;
+    Route::get('/account/edit/{id}', [UserController::class, 'edit'])->name('account.edit')->middleware('auth');;
+    Route::put('/account/update/{id}', [UserController::class, 'update'])->name('account.update')->middleware('auth');;
+    Route::delete('/account/delete/{id}', [UserController::class, 'destroy'])->name('account.destroy')->middleware('auth');;
 });
 Route::get('/login', function () {
     return view('auth.login');
@@ -61,7 +61,7 @@ Route::get('/logout', [UserController::class,'logout']);
 
 Route::get('/change-password', [UserController::class, 'showChangePasswordForm'])->name('profile.change-password')->middleware('auth');
 Route::post('/change-password', [UserController::class, 'changePassword'])->name('profile.update-password')->middleware('auth');
-Route::get('/profile/edit', [UserController::class, 'edit'])->name('profile.edit_profile')->middleware('auth');
-Route::put('/profile/update',[UserController::class, 'update'])->name('profile.edit_profile')->middleware('auth');
+Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit_profile')->middleware('auth');
+Route::put('/profile/update',[UserController::class, 'updateProfile'])->name('profile.update_profile')->middleware('auth');
 
 
