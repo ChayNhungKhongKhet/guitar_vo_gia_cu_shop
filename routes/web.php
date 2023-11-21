@@ -52,9 +52,16 @@ Route::get('/login', function () {
 Route::get('/signup', function () {
     return redirect(route('home'));
 });
-// Route::get('/admin', function () {
-//     return view('auth.admin-home');
-// });
+Route::get('/admin', function () {
+    return view('auth.admin-home');
+});
 Route::post('/loginPost', [UserController::class, 'login']);
 Route::post('/signupPost', [UserController::class,'signup']);
 Route::get('/logout', [UserController::class,'logout']);
+
+Route::get('/change-password', [UserController::class, 'showChangePasswordForm'])->name('profile.change-password')->middleware('auth');
+Route::post('/change-password', [UserController::class, 'changePassword'])->name('profile.update-password')->middleware('auth');
+Route::get('/profile/edit', [UserController::class, 'edit'])->name('profile.edit_profile')->middleware('auth');
+Route::put('/profile/update',[UserController::class, 'update'])->name('profile.edit_profile')->middleware('auth');
+
+

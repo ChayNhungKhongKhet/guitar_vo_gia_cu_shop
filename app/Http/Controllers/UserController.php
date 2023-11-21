@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -13,28 +14,50 @@ class UserController extends Controller
     public function showLogin(){
         return view('login');
     }
-    public function login(Request $request){
-        $request -> validate([
-            'username' => "required",
-            'password' => "required"
-       ]);
-       $user = User::where('username','=', $request->username)->first();
-       if ($user) {
-        if (Hash::check($request->password, $user->password)) {
-            $request->session()->put('remember_token', $user->remember_token);
-            //check account admin
-            if ($user->is_Admin == 0) {
+      public function login(Request $request)
+    {
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            // Nếu đăng nhập thành công, kiểm tra nếu người dùng là admin
+            if (Auth::user()->is_admin) {
                 return redirect('/admin');
             } else {
-                return redirect(route('home', ['username' => $user->username]));
+                return redirect(route('home'));
             }
-        } else {
-            return back()->with('fail', 'The password does not match');
         }
-    } else {
-        return back()->with('fail', 'The username is not registered');
+
+        return back()->withErrors(['username' => 'Invalid credentials']);
     }
-    }
+    // public function login(Request $request){
+    //     $request -> validate([
+    //         'username' => "required",
+    //         'password' => "required"
+    //    ]);
+    //    $user = User::where('username','=', $request->username)->first();
+    //    if ($user) {
+    //     if (Hash::check($request->password, $user->password)) {
+    //         $request->session()->put('remember_token', $user->remember_token);
+    //         //check account admin
+    //         if ($user->is_Admin == 0) {
+    //             return redirect('/admin');
+    //         } else {
+    //             return redirect(route('home', ['username' => $user->username]));
+    //         }
+    //     } else {
+    //         return back()->with('fail', 'The password does not match');
+    //     }
+    // } else {
+    //     return back()->with('fail', 'The username is not registered');
+    // }
+    // }
     public function signup(Request $request){
          $request -> validate([
             'username' => "required|unique:users",
@@ -134,7 +157,7 @@ class UserController extends Controller
             'birthday' => $validatedData['birthday'],
         ]);
 
-        return redirect()->route('account.index', $id)->with('success', 'Account updated successfully!');
+        return redirect()->route('account.index')->with('success', 'Account updated successfully!');
     }
 
     public function destroy($id)
@@ -143,4 +166,57 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('account.index')->with('success', 'Account deleted successfully!');
     }
+    public function showChangePasswordForm()
+    {
+        return view('user.change-password');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:5',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        // Kiểm tra mật khẩu hiện tại có khớp không
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Incorrect current password']);
+        }
+
+        // Cập nhật mật khẩu mới
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return redirect()->route('profile.change-password')->with('success', 'Password updated successfully');
+    }
+
+    //  public function edit()
+    // {
+    //     $user = Auth::user();
+    //     return view('user.edit_profile', compact('user'));
+    // }
+
+    // public function update(Request $request)
+    // {
+    //     $user = Auth::user();
+
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+    //         // Thêm các quy tắc xác thực cho các trường khác nếu cần
+    //     ]);
+
+    //     // Cập nhật thông tin cá nhân của người dùng
+    //     $user->update([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         // Cập nhật các trường dữ liệu khác tương ứng trong bảng người dùng
+    //     ]);
+
+    //     return redirect()->route('profile.edit')->with('success', 'Profile updated successfully');
+    // }
 }
