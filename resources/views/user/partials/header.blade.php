@@ -69,7 +69,7 @@
                                         <li class="has_submenu active"><a href="{{ url('/') }}">Home</a></li>
                                         <li><a href="collection.html">Classic</a></li>
                                         <li><a href="collection.html">Electric</a></li>
-                                        <li><a href="{{ url('/product') }}">Product</a></li>
+                                        <li><a href="{{ url('/products') }}">Product</a></li>
                                         <li><a href="{{ url('/contact') }}">Contact</a></li>
                                     </ul>
                                 </div>
@@ -130,8 +130,8 @@
                                                     <div id="hide" class="modify">
                                                         <a href="/logout">Logout</a>
                                                         <a href="/profile">Profile</a>
-                                                    </div>                                                                                                       
-                                                </div>                                               
+                                                    </div>
+                                                </div>
                                             </div>
                                         </li>
                                     </ul>
@@ -337,12 +337,12 @@
         padding: 10px;
     }
     .modify a{
-        display: block;   
-        position: relative;    
+        display: block;
+        position: relative;
         top: 0;
         right: 0;
         padding-left: 0;
-        
+
     }
     .modify a:hover{
         color: red;

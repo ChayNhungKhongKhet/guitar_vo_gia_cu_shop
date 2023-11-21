@@ -21,7 +21,7 @@ Route::get('/contact', function () {
     return view('user.contact');
 });
 
-Route::get('/product', function () {
+Route::get('/products', function () {
     return view('user.product');
 });
 Route::get('/login', [UserController::class,'showLogin'])-> name('login');
