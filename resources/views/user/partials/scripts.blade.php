@@ -1,0 +1,10 @@
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/SmoothScroll.min.js"></script>
+        <script src="/js/swiper.min.js"></script>
+        <script src="/js/wow.min.js"></script>
+        <script src="/js/tilt.js"></script>
+        <script src="/js/jquery.magnific-popup.min.js"></script>
+        <script src="/js/jquery.mixitup.min.js"></script>
+        <script src="/js/select.min.js"></script>
+        <script src="/js/custom.js"></script>
