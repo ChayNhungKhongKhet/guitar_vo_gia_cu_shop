@@ -44,7 +44,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/account', [UserController::class, 'store'])->name('account.store');
     Route::get('/account/edit/{id}', [UserController::class, 'edit'])->name('account.edit');
     Route::put('/account/update/{id}', [UserController::class, 'update'])->name('account.update');
-    Route::delete('/account/delete/{id}', [UserController::class, 'destroy'])->name('account.destroy');
+    Route::get('/account/delete/{id}', [UserController::class, 'destroy'])->name('account.destroy');
 });
 Route::get('/login', function () {
     return view('auth.login');

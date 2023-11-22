@@ -281,6 +281,11 @@ body {
     background: #f5f5f5;
     font-family: 'Roboto', sans-serif;
 }
+
+#container-xl {
+    max-width: 1250px;
+}
+
 .table-responsive {
     margin: 30px 0;
 }
@@ -301,15 +306,27 @@ body {
 }
 .search-box {
     position: relative;        
-    float: right;
+    display: flex;
+    gap: 10px;
 }
-.search-box input {
+.search-box input,
+.search-box select {
     height: 34px;
     border-radius: 20px;
     padding-left: 35px;
     border-color: #ddd;
     box-shadow: none;
 }
+
+.search-box .form-check {
+    margin-top: 4px;
+}
+
+.search-box .form-check-input {
+    height: 16px;
+}
+
+
 .search-box input:focus {
     border-color: #3FBAE4;
 }
@@ -321,11 +338,18 @@ body {
     left: 10px;
 }
 
+table .button-control {
+    display: flex;
+    gap: 8px;
+}
+
 table.table td a.edit {
     color: #FFC107;
+    font-size: 16px;
 } 
 table.table td a.delete {
     color: #E34724;
+    font-size: 16px;
 }
 table.table td i {
     font-size: 15px;

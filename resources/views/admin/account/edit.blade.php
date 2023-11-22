@@ -11,12 +11,12 @@
     <div class="card-body">					
         <div class="form-group">
             <label for="username">UserName</label>
-            <input name="username" type="text" class="form-control" value="{{$user->username }}" required>
+            <input name="username" type="text" class="form-control" value="{{$user->username }}" disabled required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="password">Password</label>
             <input name="password" type="password" class="form-control" value="{{ $user->password }}" disabled required>
-        </div>
+        </div> -->
         <div class="form-group">
             <label for="name">Name</label>
             <input name="name" type="text" class="form-control" value="{{$user->name}}" required>

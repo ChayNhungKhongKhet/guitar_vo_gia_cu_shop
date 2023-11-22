@@ -57,10 +57,33 @@ class UserController extends Controller
 
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
-        // dd($users);
+        $query = User::query();
+
+        $searchTerm = $request->input('searchTerm');
+        if ($searchTerm) {
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('username', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('name', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        if ($request->has('searchUsername')) {
+            $query->orWhere('username', 'like', '%' . $searchTerm . '%');
+        }
+
+        if ($request->has('searchName')) {
+            $query->orWhere('name', 'like', '%' . $searchTerm . '%');
+        }
+
+        $searchGender = $request->input('searchGender');
+        if ($searchGender) {
+            $query->where('gender', $searchGender == 'Male' ? 0 : 1);
+        }
+
+        $users = $query->where('status', 1)->paginate(10);
+
         return view('admin.account.index', compact('users'));
     }
 
@@ -109,9 +132,9 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $validatedData = $request->validate([
-            'username' => 'required|unique:users,username,'.$id,
-            'password' => 'nullable', // Để tránh cập nhật mật khẩu mỗi khi chỉnh sửa
             'name' => 'required',
             'gender' => 'required',
             'address' => 'required',
@@ -120,12 +143,11 @@ class UserController extends Controller
             'birthday' => 'required|date',
         ]);
         
-        $user = User::findOrFail($id);
+        
         $gender =  $validatedData['gender'] === 'Male' ? 0 : 1;
-
         
         $user->update([
-            'username' => $validatedData['username'],
+            // 'username' => $validatedData['username'],
             'name' => $validatedData['name'],
             'gender' => $gender,
             'address' => $validatedData['address'],
@@ -133,14 +155,15 @@ class UserController extends Controller
             'email' => $validatedData['email'],
             'birthday' => $validatedData['birthday'],
         ]);
+        $user->save();
 
-        return redirect()->route('account.index', $id)->with('success', 'Account updated successfully!');
+        return redirect()->route('account.index')->with('success', 'Account updated successfully!');
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $user->delete();
+        $user->update(['status' => 0]);
         return redirect()->route('account.index')->with('success', 'Account deleted successfully!');
     }
 }
