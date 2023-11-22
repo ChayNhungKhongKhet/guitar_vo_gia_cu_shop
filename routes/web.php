@@ -39,12 +39,12 @@ Route::group(['prefix' => 'admin'], function () {
         return view('admin.addproduct');
     });
 
-    Route::get('/account', [UserController::class, 'index'])->name('account.index');
-    Route::get('/account/create', [UserController::class, 'create'])->name('account.create');
-    Route::post('/account', [UserController::class, 'store'])->name('account.store');
-    Route::get('/account/edit/{id}', [UserController::class, 'edit'])->name('account.edit');
-    Route::put('/account/update/{id}', [UserController::class, 'update'])->name('account.update');
-    Route::get('/account/delete/{id}', [UserController::class, 'destroy'])->name('account.destroy');
+    Route::get('/account', [UserController::class, 'index'])->name('account.index')->middleware('auth');
+    Route::get('/account/create', [UserController::class, 'create'])->name('account.create')->middleware('auth');
+    Route::post('/account', [UserController::class, 'store'])->name('account.store')->middleware('auth');
+    Route::get('/account/edit/{id}', [UserController::class, 'edit'])->name('account.edit')->middleware('auth');
+    Route::put('/account/update/{id}', [UserController::class, 'update'])->name('account.update')->middleware('auth');
+    Route::get('/account/delete/{id}', [UserController::class, 'destroy'])->name('account.destroy')->middleware('auth');
 });
 Route::get('/login', function () {
     return view('auth.login');

@@ -49,7 +49,6 @@
                         <th>#</th>
                         <th>ID</th>
                         <th>Username</th>
-                        <th>Password</th>
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Address</i></th>
@@ -69,7 +68,6 @@
                                 <td>{{ $counter }}</td>
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->username }}</td>
-                                <td>{{ $user->password }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>
                                     @if ($user->gender == 0)

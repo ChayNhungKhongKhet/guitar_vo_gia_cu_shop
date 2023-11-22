@@ -93,11 +93,11 @@ class UserController extends Controller
         }
 
         if ($request->has('searchUsername')) {
-            $query->orWhere('username', 'like', '%' . $searchTerm . '%');
+            $query->Where('username', 'like', '%' . $searchTerm . '%');
         }
 
         if ($request->has('searchName')) {
-            $query->orWhere('name', 'like', '%' . $searchTerm . '%');
+            $query->Where('name', 'like', '%' . $searchTerm . '%');
         }
 
         $searchGender = $request->input('searchGender');
@@ -134,8 +134,8 @@ class UserController extends Controller
         User::create([
             'username' => $request->input('username'),
             //băm mật khẩu
-            // 'password' => Hash::make($request->input('password')),
-            'password' => $request->input('password'),
+            'password' => Hash::make($request->input('password')),
+            // 'password' => $request->input('password'),
             'name' => $request->input('name'),
             'gender' => $gender,
             'address' => $request->input('address'),
@@ -194,28 +194,28 @@ class UserController extends Controller
         return view('user.change-password');
     }
 
-    public function changePassword(Request $request)
-    {
-        $user = Auth::user();
+    // public function changePassword(Request $request)
+    // {
+    //     $user = Auth::user();
 
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|min:5',
-            'confirm_password' => 'required|same:new_password',
-        ]);
+    //     $request->validate([
+    //         'current_password' => 'required',
+    //         'new_password' => 'required|min:5',
+    //         'confirm_password' => 'required|same:new_password',
+    //     ]);
 
-        // Kiểm tra mật khẩu hiện tại có khớp không
-        if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'Incorrect current password']);
-        }
+    //     // Kiểm tra mật khẩu hiện tại có khớp không
+    //     if (!Hash::check($request->current_password, $user->password)) {
+    //         return back()->withErrors(['current_password' => 'Incorrect current password']);
+    //     }
 
-        // Cập nhật mật khẩu mới
-        $user->update([
-            'password' => Hash::make($request->new_password),
-        ]);
+    //     // Cập nhật mật khẩu mới
+    //     $user->update([
+    //         'password' => Hash::make($request->new_password),
+    //     ]);
 
-        return redirect()->route('profile.change-password')->with('success', 'Password updated successfully');
-    }
+    //     return redirect()->route('profile.change-password')->with('success', 'Password updated successfully');
+    // }
 
     //  public function edit()
     // {
