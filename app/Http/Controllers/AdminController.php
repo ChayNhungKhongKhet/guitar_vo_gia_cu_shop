@@ -45,10 +45,6 @@ class AdminController extends Controller
         }
 
         //query data for pie chart
-        
-
-
-
         return view('admin.dashboard', ['datamonth' => $dataMonth,'dataquarter' => $dataQuarter,'datayear' => $dataYear]);
     }
 }

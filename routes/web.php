@@ -3,7 +3,6 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
-
 Route::get('/', function () {
     return view('user.home');
 })->name('home');
@@ -24,7 +23,7 @@ Route::get('/contact', function () {
     return view('user.contact');
 });
 
-Route::get('/product', function () {
+Route::get('/products', function () {
     return view('user.product');
 });
 
@@ -53,3 +52,8 @@ Route::get('/signup', [UserController::class, 'showSignup'])->name('signup');
 Route::post('/loginPost', [UserController::class, 'login']);
 Route::post('/signupPost', [UserController::class, 'signup']);
 Route::get('/logout', [UserController::class, 'logout']);
+Route::get('/login', [UserController::class,'showLogin'])-> name('login');
+Route::get('/signup', [UserController::class,'showSignup'])->name('signup');
+Route::post('/loginPost', [UserController::class, 'login']);
+Route::post('/signupPost', [UserController::class,'signup']);
+Route::get('/logout', [UserController::class,'logout']);
