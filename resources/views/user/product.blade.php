@@ -218,6 +218,15 @@
                               </div>
                            </div>
                         </div>
+                      
+                            <div style="margin-bottom: 30px;" class="pe_top_right_section">
+                                <div class="pe_top_search">
+                                    <input type="text" placeholder="Search for product">
+                                    <a href="javascript:void(0);"><img src="/images/header_search.svg"
+                                            alt="images"></a>
+                                </div>
+                            </div>
+                     
                         <div class="col-lg-9 col-md-12 col-sm-12 order-lg-2 order-md-1 order-sm-1 order-1">
                            <div class="collection_main_wrapper">
                               <div class="wrapper">
@@ -230,7 +239,7 @@
                                        <div class="product__inner">
                                           <div class="product__image">
                                             
-                                             <img src="{{ asset('storage/images/bgaBgLb57wNYY0CU7pBSYGdCxg81UdCskweS2k22.png') }}" alt="images" />
+                                             <img src="{{ asset('storage/images/rnUqleJrOmRMF52IERvwpQkJMXRHbY9kQSrXdZbo.jpg') }}" alt="images" />
                                           </div>
                                           <div class="product__details">
                                              <div class="pe_product_name">
