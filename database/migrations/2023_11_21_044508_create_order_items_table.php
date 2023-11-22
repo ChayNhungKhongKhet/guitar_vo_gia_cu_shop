@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('Order_item', function (Blueprint $table) {
+
+        Schema::create('order_items', function (Blueprint $table)
+        {
             $table->id();
             $table->integer('order_detail_id');
             $table->integer('product_id');
             $table->timestamps();
-        });    }
+        });
+    }
 
     /**
      * Reverse the migrations.
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Order_item');
+        Schema::dropIfExists('order_items');
     }
 };

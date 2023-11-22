@@ -1,6 +1,9 @@
 <?php
+
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('user.home');
 })->name('home');
@@ -28,9 +31,7 @@ Route::get('/product', function () {
 
 //admin
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', [AdminController::class, 'showData'])->name('admin.show');
-
-
+    Route::get('/', [AdminController::class, 'show'])->name('admin.show');
     Route::get('/product', function () {
         return view('admin.product');
     });
@@ -47,11 +48,8 @@ Route::group(['prefix' => 'admin'], function () {
         return view('admin.addaccount');
     });
 });
-Route::get('/login', [UserController::class,'showLogin'])-> name('login');
-Route::get('/signup', [UserController::class,'showSignup'])->name('signup');
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
+Route::get('/login', [UserController::class, 'showLogin'])->name('login');
+Route::get('/signup', [UserController::class, 'showSignup'])->name('signup');
 Route::post('/loginPost', [UserController::class, 'login']);
-Route::post('/signupPost', [UserController::class,'signup']);
-Route::get('/logout', [UserController::class,'logout']);
+Route::post('/signupPost', [UserController::class, 'signup']);
+Route::get('/logout', [UserController::class, 'logout']);
