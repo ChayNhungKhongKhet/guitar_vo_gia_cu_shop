@@ -1,10 +1,11 @@
 @extends('admin.layout.master')
 @section('content')
 <div id="container">
-    <form action="{{route('product.store')}}" method="post">
+    <img src="{{ asset('storage/images/bgaBgLb57wNYY0CU7pBSYGdCxg81UdCskweS2k22.png') }}" alt="Product Image">
+    <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="card-header">						
-            <h4 class="card-title">Add Account</h4>
+            <h4 class="card-title">Add Product</h4>
         </div>
         <div class="card-body">					
             <div class="form-group">
@@ -36,6 +37,10 @@
             <div class="form-group">
                 <label>Remain</label>
                 <input name="remain" type="text" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">Đăng ảnh</label>
+                <input type="file" name="linkimg" class="form-control-file"  id="exampleFormControlFile1">
             </div>
             
 

@@ -15,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('products')->get();
+        $categories = Category::paginate(10);
+        // :with('products')->get();
 
         return view('admin.product.index', compact('categories'));
     }
@@ -43,6 +44,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         // $validatedData = $request->validate((
         //     'name' => 'required|string',
         //     'distributor' => 'required|string',
@@ -52,6 +54,8 @@ class ProductController extends Controller
         //     'remain' => 'required|numeric',
         //     // 'link_img' => 'required|string',
         // ]);
+        $imagePath = $request->file('linkimg')->store('images', 'public');
+    
         Product::create([
             'name' =>  $request->input('name'),
             'category_id' => $request->input('category_id'),
@@ -59,6 +63,7 @@ class ProductController extends Controller
             'price' => $request->input('price'),
             'description' => $request->input('description'),
             'remain' => $request->input('remain'),
+            'linkimg' => $imagePath,
         ]);
         return redirect()->route('product.index')->with('success', 'Product created successfully');
     }
@@ -72,6 +77,10 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        $categories = Category::paginate(100);
+        // :with('products')->get();
+
+        return view('user.product', compact('categories'));
     }
 
     /**
@@ -80,9 +89,11 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $categories = Category::with('products')->get();
+        $product = Product::findOrFail($id);
+        return view('admin.product.edit', compact('product','categories'));
     }
 
     /**
@@ -92,9 +103,33 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        // $validatedData = $request->validate([
+        //     'name' => 'required'.$id,
+        //     'category_id' => 'required', // Để tránh cập nhật mật khẩu mỗi khi chỉnh sửa
+        //     'distributor' => 'required',
+        //     'price' => 'required',
+        //     'description' => 'required',
+        //     'remain' => 'required',
+            
+        // ]);
+        
+        $product = Product::findOrFail($id);
+        // $categories =  $validatedData['category_id'] === 'Category 1' ? 0 : 1;
+
+        
+        $product->update([
+             
+            'name' =>  $request->input('name'),
+            'category_id' => $request->input('category_id'),
+            'distributor' => $request->input('distributor'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+            'remain' => $request->input('remain'),
+        ]);
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully!');
     }
 
     /**

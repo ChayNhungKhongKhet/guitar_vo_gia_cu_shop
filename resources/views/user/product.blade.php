@@ -222,14 +222,19 @@
                            <div class="collection_main_wrapper">
                               <div class="wrapper">
                                  <div class="products grid group">
+                                    @foreach ($categories as $category)
+                        @foreach ($category->products as $product)
                                     <div class="product">
+                                        
+                         
                                        <div class="product__inner">
                                           <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
+                                            
+                                             <img src="{{ asset('storage/images/bgaBgLb57wNYY0CU7pBSYGdCxg81UdCskweS2k22.png') }}" alt="images" />
                                           </div>
                                           <div class="product__details">
                                              <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
+                                                <a href="product_detail.html"><p> {{$product->name}}  <span></span></p></a>
                                                 <div class="pe_product_ratings">
                                                    <p><i class="fa fa-star rating1"></i></p>
                                                    <p><i class="fa fa-star rating1"></i></p>
@@ -241,325 +246,24 @@
                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
                                                 </div>
                                                 <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
+                                                   <span class="pe_product_price1">{{ $product->price}}</span>
                                                    <span class="pe_product_price2">$50.00</span>
                                                 </div>
                                                 <div class="pe_product_btn pe_btn"><a href="javascript:void(0);">Shop Now</a></div>
                                              </div>
                                           </div>
+                                          
+
                                           <!-- /product__details -->
                                        </div>
                                     </div>
+                                       @endforeach
+                    @endforeach
+                                     
                                     <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                                <div class="pe_product_btn pe_btn"><a href="javascript:void(0);">Shop Now</a></div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
+                                    
                                     <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
-                                    <div class="product">
-                                       <div class="product__inner">
-                                          <div class="product__image">
-                                             <img src="http://placehold.it/262x340" alt="images" />
-                                          </div>
-                                          <div class="product__details">
-                                             <div class="pe_product_name">
-                                                <a href="product_detail.html"><p>Dummy Product <span>Name</span></p></a>
-                                                <div class="pe_product_ratings">
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating1"></i></p>
-                                                   <p><i class="fa fa-star rating5"></i></p>
-                                                </div>
-                                                <div class="pe_product_txt1">
-                                                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s </p>
-                                                </div>
-                                                <div class="pe_product_price">
-                                                   <span class="pe_product_price1">$40.00</span>
-                                                   <span class="pe_product_price2">$50.00</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <!-- /product__details -->
-                                       </div>
-                                    </div>
-                                    <!-- /product -->
+                                    product -->
                                  </div>
                                  <!-- /products -->
                               </div>

@@ -40,8 +40,8 @@
                             <td>{{ $category->name }}</td>
                             <td>{{ $product->remain }}</td>
                             <td>
-                                <button href="" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></button>
-                                <button type="button" data-toggle="modal" data-target="#deleteModal{{ $product->id }}"><i class="material-icons">&#xE872;</i></button>
+                                <a href="{{route('product.edit', $product->id)}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                <a type="button" data-toggle="modal" data-target="#deleteModal{{ $product->id }}"><i class="material-icons">&#xE872;</i></a>
 
                                 <!-- Modal -->
                                     <div class="modal fade" id="deleteModal{{ $product->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -74,6 +74,7 @@
                                                                
                 </tbody>
             </table>
+            
         </div>
     </div>  
 </div>   

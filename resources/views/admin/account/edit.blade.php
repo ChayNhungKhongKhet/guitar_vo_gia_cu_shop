@@ -1,7 +1,6 @@
 @extends('admin.layout.master')
 @section('content')
 <div class="container">
-
 <form action="{{ route('account.update', $user->id) }}" method="post">
 @csrf
 @method('PUT')

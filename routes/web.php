@@ -22,10 +22,10 @@ Route::get('/cart', function () {
 Route::get('/contact', function () {
     return view('user.contact');
 });
-
-Route::get('/product', function () {
-    return view('user.product');
-});
+Route::get('/product', [ProductController::class, 'show']) ;
+// Route::get('/product', function () {
+//     return view('user.product');
+// });
 
 //admin
 Route::group(['prefix' => 'admin'], function () {
@@ -36,9 +36,11 @@ Route::group(['prefix' => 'admin'], function () {
     
 
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-    Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
     Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+    Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 
     Route::get('/account', [UserController::class, 'index'])->name('account.index')->middleware('auth');;
     Route::get('/account/create', [UserController::class, 'create'])->name('account.create')->middleware('auth');;
