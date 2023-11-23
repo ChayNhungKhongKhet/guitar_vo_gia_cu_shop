@@ -105,7 +105,7 @@ class UserController extends Controller
             $query->where('gender', $searchGender == 'Male' ? 0 : 1);
         }
 
-        $users = $query->where('status', 1)->paginate(10);
+        $users = $query->where('status', 1)->paginate(5);
 
         return view('admin.account.index', compact('users'));
     }
