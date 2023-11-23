@@ -93,10 +93,10 @@ class ProductController extends Controller
         // Nếu có giá trị tìm kiếm, thực hiện truy vấn tìm kiếm
         $products = Product::where('name', 'like', '%' . $searchTerm . '%')
             ->orWhere('description', 'like', '%' . $searchTerm . '%')
-            ->paginate(10);
+            ->paginate(30);
     } else {
         // Nếu không có giá trị tìm kiếm, lấy tất cả sản phẩm
-        $products = Product::paginate(10);
+        $products = Product::paginate(30);
     }
 
     return view('user.product', compact( 'products', 'searchTerm'));

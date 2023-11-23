@@ -287,6 +287,7 @@
                               </div>
                               <!-- /wrapper -->
                            </div>
+                           {{ $products->links() }}
                         </div>
                      </div>
                   </div>

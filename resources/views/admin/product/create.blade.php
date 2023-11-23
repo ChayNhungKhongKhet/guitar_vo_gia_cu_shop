@@ -37,9 +37,11 @@
                 <label>Remain</label>
                 <input name="remain" type="text" class="form-control" required>
             </div>
+
             <div class="form-group">
                 <label for="exampleFormControlFile1">Img</label>
-                <input type="file" name="linkimg" class="form-control-file"  id="exampleFormControlFile1">
+                <input type="file" name="linkimg" class="form-control-file" id="exampleFormControlFile1" onchange="previewImg(this)">
+                <img id="previewImage" style="max-width: 200px; max-height: 200px; display: none;" alt="Preview Image">
             </div>
             
 
@@ -48,4 +50,24 @@
     
     </form>
 </div>
+<script>
+    function previewImg(input) {
+        var preview = document.getElementById('previewImage');
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            preview.style.display = 'block';
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
+            preview.style.display = 'none';
+        }
+    }
+</script>
+
 @endsection
