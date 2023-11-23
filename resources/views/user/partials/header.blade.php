@@ -6,15 +6,7 @@
                                 <a href="index.html"><img src="/images/header_logo.png" alt="images"></a>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-12">
-                            <div class="pe_top_right_section">
-                                <div class="pe_top_search">
-                                    <input type="text" placeholder="Search for product">
-                                    <a href="javascript:void(0);"><img src="/images/header_search.svg"
-                                            alt="images"></a>
-                                </div>
-                            </div>
-                        </div>
+                
                     </div>
                 </div>
             </div>
