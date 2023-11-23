@@ -5,13 +5,23 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2>Manager <b>Account</b></h2></div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-8"><h2>Manager <b>Product</b></h2></div>
+                    {{-- <div class="col-sm-4">
                         <div class="search-box">
                             <i class="material-icons">&#xE8B6;</i>
                             <input type="text" class="form-control" placeholder="Search&hellip;">
                         </div>
-                    </div>
+                    </div> --}}
+                    <form action="{{ route('product.index') }}" method="GET">
+                     <div style="margin-bottom: 30px;" class="pe_top_right_section">
+                        <div class="pe_top_search">
+                           <input name="searchTerm" type="text" placeholder="Search for product" value="{{ $searchTerm ?? '' }}">
+                           <button type="submit" style="border: none; "><img src="/images/header_search.svg" style="margin-right: 10px;" alt="images"></button>
+                         </div>
+                     </div>
+                     </form>
+
+
                     <div class="col-sm-8">
                     <a href="{{route('product.create')}}"  class="btn btn-success" ><i class="material-icons">&#xE147;</i> <span></span></a>
                     </div>
@@ -23,22 +33,26 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Distributor</th>
+                        <th>Price</th>
                         <th>Description</th>
                         <th>Category Name</th>
                         <th>Remain</th>
+                        <th>IMG</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($categories as $category)
-                        @foreach ($category->products as $product)
+                        @foreach ($products as $product)
+                        
                         <tr>
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->distributor }}</td>
+                            <td>{{ $product->price }}</td>
                             <td>{{ $product->description }}</td>
-                            <td>{{ $category->name }}</td>
+                            <td>{{ $product->category->name }}</td>
                             <td>{{ $product->remain }}</td>
+                            <td><img src="{{ asset('storage/'.$product->linkimg) }}"   style="width: 50px; height: auto;"></td>
                             <td>
                                 <a href="{{route('product.edit', $product->id)}}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                                 <a type="button" data-toggle="modal" data-target="#deleteModal{{ $product->id }}"><i class="material-icons">&#xE872;</i></a>
@@ -70,7 +84,6 @@
                         </td>
                         </tr>
                         @endforeach
-                    @endforeach
                                                                
                 </tbody>
             </table>

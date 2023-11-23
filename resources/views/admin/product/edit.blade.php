@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 @section('content')
 <div class="container">
-<form action="{{ route('product.update', $product->id) }}" method="post">
+<form action="{{ route('product.update', $product->id) }}" method="post" enctype="multipart/form-data">
 @csrf
 @method('PUT')
     <div class="card-header">						
@@ -47,8 +47,11 @@
             <label for="remain">Remain</label>
             <input name="remain" type="text" class="form-control" value="{{ $product->remain  }}" required>
         </div>
-        
-
+        <div class="form-group">
+            <label for="linkimg">Img</label>
+            <input type="file" name="linkimg" class="form-control-file"  id="exampleFormControlFile1" onchange="previewImage(this)">
+             
+        </div>     
     </div>
     <div class="btn-control">
         <button type="submit" class="btn btn-success btn-update">Update</button>
@@ -56,4 +59,5 @@
    
 </form>
 </div>
+ 
 @endsection

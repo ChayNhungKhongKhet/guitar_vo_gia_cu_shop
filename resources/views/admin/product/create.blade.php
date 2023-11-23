@@ -38,7 +38,7 @@
                 <input name="remain" type="text" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlFile1">Đăng ảnh</label>
+                <label for="exampleFormControlFile1">Img</label>
                 <input type="file" name="linkimg" class="form-control-file"  id="exampleFormControlFile1">
             </div>
             

@@ -13,12 +13,22 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(10);
-        // :with('products')->get();
+        // $categories = Category::paginate(100);
+        $searchTerm = $request->input('searchTerm');
 
-        return view('admin.product.index', compact('categories'));
+        if ($searchTerm) {
+            // Nếu có giá trị tìm kiếm, thực hiện truy vấn tìm kiếm
+            $products = Product::where('name', 'like', '%' . $searchTerm . '%')
+                ->orWhere('description', 'like', '%' . $searchTerm . '%')
+                ->paginate(10);
+        } else {
+            // Nếu không có giá trị tìm kiếm, lấy tất cả sản phẩm
+            $products = Product::paginate(10);
+        }
+
+        return view('admin.product.index', compact( 'products', 'searchTerm'));
     }
 
     /**
@@ -127,7 +137,7 @@ class ProductController extends Controller
         
         $product = Product::findOrFail($id);
         // $categories =  $validatedData['category_id'] === 'Category 1' ? 0 : 1;
-
+        $imagePath = $request->file('linkimg')->store('images', 'public');
         
         $product->update([
              
@@ -137,6 +147,8 @@ class ProductController extends Controller
             'price' => $request->input('price'),
             'description' => $request->input('description'),
             'remain' => $request->input('remain'),
+            'linkimg' => $imagePath,
+
         ]);
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully!');
