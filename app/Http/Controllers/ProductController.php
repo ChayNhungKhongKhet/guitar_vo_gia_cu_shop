@@ -74,14 +74,24 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
-    {
-        //
-        $categories = Category::paginate(100);
-        // :with('products')->get();
+    public function show(Request $request)
+{
+    // $categories = Category::paginate(100);
+    $searchTerm = $request->input('searchTerm');
 
-        return view('user.product', compact('categories'));
+    if ($searchTerm) {
+        // Nếu có giá trị tìm kiếm, thực hiện truy vấn tìm kiếm
+        $products = Product::where('name', 'like', '%' . $searchTerm . '%')
+            ->orWhere('description', 'like', '%' . $searchTerm . '%')
+            ->paginate(10);
+    } else {
+        // Nếu không có giá trị tìm kiếm, lấy tất cả sản phẩm
+        $products = Product::paginate(10);
     }
+
+    return view('user.product', compact( 'products', 'searchTerm'));
+}
+
 
     /**
      * Show the form for editing the specified resource.

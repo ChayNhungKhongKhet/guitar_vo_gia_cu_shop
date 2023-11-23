@@ -1,7 +1,6 @@
 @extends('admin.layout.master')
 @section('content')
 <div id="container">
-<img src="{{ asset('storage/images/rnUqleJrOmRMF52IERvwpQkJMXRHbY9kQSrXdZbo.jpg') }}" alt="images" />
     <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="card-header">						

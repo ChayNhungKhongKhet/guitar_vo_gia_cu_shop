@@ -219,27 +219,30 @@
                            </div>
                         </div>
                       
-                            <div style="margin-bottom: 30px;" class="pe_top_right_section">
-                                <div class="pe_top_search">
-                                    <input type="text" placeholder="Search for product">
-                                    <a href="javascript:void(0);"><img src="/images/header_search.svg"
-                                            alt="images"></a>
-                                </div>
-                            </div>
-                     
+                        
+
+                     <form action="{{ route('product.show') }}" method="GET">
+                     <div style="margin-bottom: 30px;" class="pe_top_right_section">
+                        <div class="pe_top_search">
+                           <input name="searchTerm" type="text" placeholder="Search for product" value="{{ $searchTerm ?? '' }}">
+                           <button type="submit" style="border: none; "><img src="/images/header_search.svg" style="margin-right: 10px;" alt="images"></button>
+                         </div>
+                     </div>
+                     </form>
+
                         <div class="col-lg-9 col-md-12 col-sm-12 order-lg-2 order-md-1 order-sm-1 order-1">
                            <div class="collection_main_wrapper">
                               <div class="wrapper">
                                  <div class="products grid group">
-                                    @foreach ($categories as $category)
-                        @foreach ($category->products as $product)
+                                    @foreach ($products as $product)
+                      
                                     <div class="product">
                                         
                          
                                        <div class="product__inner">
                                           <div class="product__image">
                                             
-                                             <img src="{{ asset('storage/images/rnUqleJrOmRMF52IERvwpQkJMXRHbY9kQSrXdZbo.jpg') }}" alt="images" />
+                                             <img src="{{ asset('storage/' .$product['linkimg']) }}" alt="images" />
                                           </div>
                                           <div class="product__details">
                                              <div class="pe_product_name">
@@ -267,12 +270,12 @@
                                        </div>
                                     </div>
                                        @endforeach
-                    @endforeach
+                  
                                      
                                     <!-- /product -->
                                     
                                     <!-- /product -->
-                                    product -->
+                                 
                                  </div>
                                  <!-- /products -->
                               </div>
