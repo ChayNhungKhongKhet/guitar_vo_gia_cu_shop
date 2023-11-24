@@ -65,7 +65,7 @@ class ShoppingCart extends Component
 
         foreach ($this->cart_items as $item) {
             $product = Product::find($item->product_id);
-            if (!$product || $product->stock_quantity < $item->quantity) {
+            if (!$product || $product->remain < $item->quantity) {
                 session()->flash('error', $product->name . ' not enough quantity');
                 return redirect('/cart');
             }
@@ -84,7 +84,7 @@ class ShoppingCart extends Component
                 }
                 $order->increment('total_price', $item->quantity * $item->product->price);
                 foreach ($this->cart_items as $item) {
-                    Product::find($item->product_id)->decrement('stock_quantity', $item->quantity);
+                    Product::find($item->product_id)->decrement('remain', $item->quantity);
                 }
                 Cart::where('user_id', auth()->id())->delete();
                 session()->flash('success', 'Completed Checkout Processing');
