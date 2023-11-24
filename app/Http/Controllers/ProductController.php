@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -39,7 +40,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::with('products')->get();
-        
+
         // In dữ liệu và kết thúc chương trình
 
         // Hoặc truyền dữ liệu vào view và hiển thị
@@ -65,7 +66,7 @@ class ProductController extends Controller
         //     // 'link_img' => 'required|string',
         // ]);
         $imagePath = $request->file('linkimg')->store('images', 'public');
-    
+
         Product::create([
             'name' =>  $request->input('name'),
             'category_id' => $request->input('category_id'),
@@ -132,15 +133,15 @@ class ProductController extends Controller
         //     'price' => 'required',
         //     'description' => 'required',
         //     'remain' => 'required',
-            
+
         // ]);
-        
+
         $product = Product::findOrFail($id);
         // $categories =  $validatedData['category_id'] === 'Category 1' ? 0 : 1;
         $imagePath = $request->file('linkimg')->store('images', 'public');
-        
+
         $product->update([
-             
+
             'name' =>  $request->input('name'),
             'category_id' => $request->input('category_id'),
             'distributor' => $request->input('distributor'),

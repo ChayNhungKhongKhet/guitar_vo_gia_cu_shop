@@ -9,6 +9,7 @@
     <meta name="MobileOptimized" content="320">
     <title>Vo Gia Cu Shop</title>
     @include('user.partials.styles')
+    @livewireStyles
 </head>
 <body>
     <section class="pe_loader">
@@ -28,5 +29,6 @@
     @include('user.partials.footer')
     <a href="javascript:void(0);" id="scroll"><span class="fa fa-angle-double-up"></span></a>
     @include('user.partials.scripts')
+    @livewireScripts
 </body>
 </html>

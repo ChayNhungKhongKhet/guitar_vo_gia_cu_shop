@@ -2,8 +2,14 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+<<<<<<< HEAD
 use App\Http\Controllers\AdminController;
+=======
+use App\Http\Livewire\ProductsTable;
+use App\Http\Livewire\ShoppingCart;
+>>>>>>> tan_add_remove_product_from_cart
 use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('user.home');
 })->name('home');
@@ -28,6 +34,7 @@ Route::get('/product', [ProductController::class, 'show'])->name('product.show')
 //     return view('user.product');
 // });
 
+<<<<<<< HEAD
 //admin
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function () {
@@ -63,5 +70,18 @@ Route::get('/change-password', [UserController::class, 'showChangePasswordForm']
 Route::post('/change-password', [UserController::class, 'changePassword'])->name('profile.update-password')->middleware('auth');
 Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit_profile')->middleware('auth');
 Route::put('/profile/update',[UserController::class, 'updateProfile'])->name('profile.update_profile')->middleware('auth');
+=======
+Route::get('/product', [ProductController::class, 'index'])
+    ->name('product.index');
+Route::get('/products/{product_id}', [ProductController::class, 'show']);
+Route::get('/login', [UserController::class, 'showLogin'])->name('login');
+Route::get('/signup', [UserController::class, 'showSignup'])->name('signup');
+Route::get('/admin', function () {
+    return view('admin.dashboard');
+});
+Route::post('/loginPost', [UserController::class, 'login']);
+Route::post('/signupPost', [UserController::class, 'signup']);
+Route::get('/logout', [UserController::class, 'logout']);
+>>>>>>> tan_add_remove_product_from_cart
 
 

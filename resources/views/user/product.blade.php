@@ -224,6 +224,7 @@
                               </div>
                            </div>
                         </div>
+<<<<<<< HEAD
                       
                         
 
@@ -310,6 +311,42 @@
                                             <p class="pe_sale_one_text3">On women’s fashion accessories</p>
                                         </div>
                                     </div>
+=======
+                    </div>
+                    <div class="col-lg-9 col-md-12 col-sm-12 order-lg-2 order-md-1 order-sm-1 order-1">
+                        <div class="collection_main_wrapper">
+                            <div class="wrapper">
+
+                                    @livewire('products-table')
+                            
+                            </div>
+                            <!-- /product -->
+                        </div>
+                        <!-- /products -->
+                    </div>
+                    <!-- /wrapper -->
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+    <!-- Sale Banner Start -->
+    <div class="pe_sale_banner_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="pe_sale_banner_one">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="pe_sale_one_img"><img src="http://placehold.it/576x278" alt="images"/></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                                <div class="pe_sale_one_content">
+                                    <p class="pe_sale_one_text1">BIG SALE</p>
+                                    <p class="pe_sale_one_text2">Flat <span>40 %</span></p>
+                                    <p class="pe_sale_one_text3">On women’s fashion accessories</p>
+>>>>>>> tan_add_remove_product_from_cart
                                 </div>
                             </div>
                         </div>
