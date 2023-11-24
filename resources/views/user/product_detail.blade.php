@@ -1,5 +1,6 @@
 @extends('user.layout.master')
         @section('content')
+            @if($product)
             <section>
                <div class="pe_in_banner_wrapper">
                   <div class="container">
@@ -118,7 +119,7 @@
                         <div class="col-lg-7 col-md-6 col-sm-12 col-12">
                            <div class="pe_detail_content">
                               <div class="pe_detail_content_body">
-                                 <h3>Dummy Product Name</h3>
+                                 <h3>{{ $product->name }}</h3>
                                  <div class="pe_detail_review_box">
                                     <div class="pe_star_rating">
                                        <input type="radio" id="5-stars" name="rating" value="5" />
@@ -140,7 +141,7 @@
                                     <p>Availability: <span style="color: #1fbdd3;">In Stock</span></p>
                                  </div>
                                  <div class="pe_detail_p_price">
-                                    <p>$40.00</p>
+                                    <p>${{ $product->price }}</p>
                                  </div>
                                  <div class="pe_detail_p_disc">
                                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
@@ -553,4 +554,9 @@
                   </div>
                </div>
             </section>
+            @else
+            <div class="alert alert-warning" role="alert" style="height: 60vh; font-size: 100px; display:flex; align-items:center; justify-content:center">
+                Product Not Found!
+            </div>
+            @endif
         @endsection
