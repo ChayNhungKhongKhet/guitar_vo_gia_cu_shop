@@ -49,7 +49,7 @@
                 selectedValue = document.getElementById('timePeriod').value,
                 sizeColumn;
 
-            //Only select value 2 or 3
+            //Only select value 2 or 1
             if (selectedValue == '2') {
                 x = [],
                     i = 1;

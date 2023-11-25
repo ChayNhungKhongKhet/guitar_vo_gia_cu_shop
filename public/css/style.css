@@ -3105,6 +3105,14 @@ span.pe_contact_icon {
     padding: 10px 0 10px;
     font-weight: 600;
 }
+
+.pagination {
+    justify-content: center;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+}
+
 /********************************************************
     12. Media Query CSS Start
 ********************************************************/

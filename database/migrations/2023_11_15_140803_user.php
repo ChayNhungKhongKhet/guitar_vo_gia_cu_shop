@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('name') -> nullable();
             // 1: nam, 0: nữ -> ae nào làm update profile thì set lại
             $table->boolean('gender')->default(1);
+            $table->boolean('status')->default(1);
             $table->string('address') -> nullable();
             $table->string('phone') -> nullable();
             $table->date('birthday')-> nullable();
