@@ -18,8 +18,7 @@ class UserController extends Controller
     {
         return view('auth.login');
     }
-<<<<<<< HEAD
-      public function login(Request $request)
+    public function login(Request $request)
     {
         $request->validate([
             'username' => 'required',
@@ -33,26 +32,10 @@ class UserController extends Controller
 
             // Nếu đăng nhập thành công, kiểm tra nếu người dùng là admin
             if (Auth::user()->is_Admin == 0) {
-=======
-    public function login(Request $request)
-    {
-        $request->validate([
-            'username' => "required",
-            'password' => "required"
-        ]);
-        $user = User::where('username', '=', $request->username)->first();
-        if (Hash::check($request->password, $user->password)) {
-            // Update session with user information
-            auth()->login($user);
-
-            // Continue with your existing logic
-            if ($user->is_Admin == 0) {
->>>>>>> tan_add_remove_product_from_cart
                 return redirect('/admin');
             } else {
                 return redirect(route('home'));
             }
-<<<<<<< HEAD
         }
 
         return back()->withErrors(['username' => 'Invalid credentials']);
@@ -79,17 +62,9 @@ class UserController extends Controller
     //     return back()->with('fail', 'The username is not registered');
     // }
     // }
-    public function signup(Request $request){
-         $request -> validate([
-=======
-        } else {
-            return back()->with('fail', 'The password does not match');
-        }
-    }
     public function signup(Request $request)
     {
         $request->validate([
->>>>>>> tan_add_remove_product_from_cart
             'username' => "required|unique:users",
             'email' => "required|email|unique:users",
             'password' => "required|min:5"
@@ -152,7 +127,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required',
             'name' => 'required',
@@ -161,7 +136,7 @@ class UserController extends Controller
             'phone' => 'required',
             'email' => 'required|email',
             'birthday' => 'required',
-            
+
         ]);
 
         $gender = $request->input('gender') === 'Male' ? 0 : 1;
@@ -200,10 +175,10 @@ class UserController extends Controller
             'email' => 'required|email',
             'birthday' => 'required|date',
         ]);
-        
-        
+
+
         $gender =  $validatedData['gender'] === 'Male' ? 0 : 1;
-        
+
         $user->update([
             // 'username' => $validatedData['username'],
             'name' => $validatedData['name'],
@@ -252,7 +227,7 @@ class UserController extends Controller
         return redirect()->route('profile.change-password')->with('success', 'Password updated successfully');
     }
 
-     public function editProfile()
+    public function editProfile()
     {
         $user = Auth::user();
         return view('user.edit_profile', compact('user'));
@@ -277,7 +252,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'gender' => $request->gender,
-            'address' =>$request->address,
+            'address' => $request->address,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
         ]);
