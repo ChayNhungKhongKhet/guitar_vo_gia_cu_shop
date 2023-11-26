@@ -33,9 +33,7 @@ Route::get('/product-show', [ProductController::class, 'show']);
 
 //admin
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('', [AdminController::class, 'show'])->name('admin.show');
 
     Route::get('/product', [ProductController::class, 'index'])->name('product.index')->middleware('auth');
     Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy')->middleware('auth');
@@ -71,9 +69,6 @@ Route::get('/product', [ProductController::class, 'index'])
 Route::get('/products/{product_id}', [ProductController::class, 'show']);
 Route::get('/login', [UserController::class, 'showLogin'])->name('login');
 Route::get('/signup', [UserController::class, 'showSignup'])->name('signup');
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
 Route::post('/loginPost', [UserController::class, 'login']);
 Route::post('/signupPost', [UserController::class, 'signup']);
 Route::get('/logout', [UserController::class, 'logout']);

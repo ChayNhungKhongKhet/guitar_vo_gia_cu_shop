@@ -11,145 +11,113 @@
         google.charts.load('current', {
             'packages': ['bar']
         });
+        google.charts.load('current', {
+            'packages': ['corechart', 'bar']
+        });
+        google.charts.setOnLoadCallback(drawStuff);
         google.charts.setOnLoadCallback(drawChart);
-        //Pie chart
-        function drawChart() {
 
-            var data = google.visualization.arrayToDataTable([
-                ['Task', 'Hours per Day'],
-                ['Work', 11],
-                ['Eat', 2],
-                ['Commute', 2],
-                ['Watch TV', 2],
-                ['Sleep', 7]
-            ]);
+        //Pie chart
+        function PieChart() {
+            var y = [],
+                i = 1;
+            y[0] = ['Quarter', 'total'];
+            <?php
+            foreach ($dataPieChart as $d) {
+            ?>
+                y[i] = ['<?php echo $d['category_name'] ?>'].concat([<?php echo $d['product_count'] ?>]);
+                i++;
+            <?php
+            } ?>;
+            var data = google.visualization.arrayToDataTable(y);
 
             var options = {
-                title: 'My Daily Activities'
+                title: 'Biểu đồ thể hiện số lượng đàn theo loại'
             };
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
+
         }
 
         //column chart
-        // Funtion select chart month, quarter or year
+        // Funtion select chart month or year
         function selectChart() {
             var period = 'Month',
                 dataPeriod,
                 x = [],
                 i = 1,
-                dataRequestGGChart,
-                selectedValue = document.getElementById('timePeriod').value;
+                selectedValue = document.getElementById('timePeriod').value,
+                sizeColumn;
 
-            //Only select value 2 or 3
-            if (selectedValue == '2' || selectedValue == '3') {
-
-                if (selectedValue == '2') {
-                    x[0] = ['Quarter', 'total'];
+            //Only select value 2 or 1
+            if (selectedValue == '2') {
+                x = [],
                     i = 1;
+                x[0] = ['Quarter', 'total_amount', 'total_orders'];
+                <?php
+                foreach ($dataYear as $d) {
+                ?>
+                    x[i] = ['<?php echo $d['year'] ?>'].concat([<?php echo $d['total_orders'] ?>]).concat([<?php echo $d['total_sales'] ?>]);
+                    i++;
+                <?php
+                } ?>;
+            } else {
+                if (selectedValue == '1') {
+                    var period = 'Month',
+                        x = [],
+                        i = 1;
+                    x[0] = ['Month', 'total_amount', 'total_orders'];
                     <?php
-                    foreach ($dataquarter as $d) {
+                    foreach ($datamonth as $d) {
                     ?>
-                        x[i] = ['<?php echo $d[0] ?>'].concat([<?php echo $d[1] ?>]);
+                        x[i] = ['<?php echo $d['month_year'] ?>'].concat([<?php echo $d['order_count'] ?>]).concat([<?php echo $d['total_amount'] ?>]);
                         i++;
                     <?php
                     } ?>;
-                    dataRequestGGChart = new google.visualization.arrayToDataTable(x);
-                } else {
-                    if (selectedValue == '3') {
-                        x[0] = ['Year', 'total'];
-                        i = 1;
-                        <?php
-                        foreach ($datayear as $d) {
-                        ?>
-                            x[i] = ['<?php echo $d[0] ?>'].concat([<?php echo $d[1] ?>]);
-                            i++;
-                        <?php
-                        } ?>;
-                        dataRequestGGChart = new google.visualization.arrayToDataTable(x);
-                    }
-
                 }
-                var options = {
-                    width: 1100,
-                    legend: {
-                        position: 'none'
-                    },
-                    chart: {},
-                    axes: {
-                        x: {
-                            0: {
-                                // side: 'top',
-                            } // Top x-axis.
-                        }
-                    },
-                    bar: {
-                        groupWidth: "50%"
-                    }
-                };
-                var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-                // Convert the Classic options to Material options.
-                chart.draw(dataRequestGGChart, google.charts.Bar.convertOptions(options));
-            } else {
-                if (selectedValue == '1') {
-                    getDataChartMonth();
-                }
-
             }
-        }
-
-        //Funtion get data for chart month
-        function getDataChartMonth() {
-            var period = 'Month',
-                dataPeriod,
-                x = [],
-                i = 1,
-                dataRequestGGChart;
-            x[0] = ['Month', 'total'];
-            <?php
-            foreach ($datamonth as $d) {
-            ?>
-                x[i] = ['<?php echo $d[0] ?>'].concat([<?php echo $d[1] ?>]);
-                i++;
-            <?php
-            } ?>;
-            dataRequestGGChart = new google.visualization.arrayToDataTable(x);
-            var options = {
-                width: 1100,
-                legend: {
-                    position: 'none'
-                },
-                chart: {},
-                axes: {
-                    x: {
-                        0: {
-                            // side: 'top',
-                        } // Top x-axis.
+            data = new google.visualization.arrayToDataTable(x);
+            var Options = {
+                width: 1200,
+                series: {
+                    0: {
+                        targetAxisIndex: 0
+                    },
+                    1: {
+                        targetAxisIndex: 1
                     }
                 },
-                bar: {
-                    groupWidth: "50%"
-                }
+                vAxes: {
+                    0: {
+
+                        title: 'Tổng đơn hàng'
+                    },
+                    1: {
+                        title: 'Tổng tiền đơn hàng'
+
+                    }
+                },
             };
-            var chart = new google.charts.Bar(document.getElementById('top_x_div'));
-            // Convert the Classic options to Material options.
-            chart.draw(dataRequestGGChart, google.charts.Bar.convertOptions(options));
+            var Chart = new google.charts.Bar(document.getElementById('columnChart'));
+            Chart.draw(data, google.charts.Bar.convertOptions(Options));
+
         }
     </script>
 </head>
 
-<body onload="getDataChartMonth(),drawChart()">
+<body onload="PieChart(),selectChart()">
     <div>
         Biểu đồ tổng số đơn hàng theo
         <select id='timePeriod' onchange="selectChart()">
             <option value="1">Month</option>
-            <option value="2">Quarter</option>
-            <option value="3">Year</option>
+            <option value="2">Year</option>
         </select>
     </div>
     <?php
     ?>
-    <div id="top_x_div" class="chartColumn" style="margin:10px 50px ; width: 800px; height: 600px;"></div>
+    <div id="columnChart" class="chartColumn" style="margin:10px 50px ; width: 800px; height: 600px;"></div>
     <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div id="chart_div"></div>
+    <div id="chart_di" style="width: 1200px; height: 500px;"></div>
 </body>
 @endsection
