@@ -61,7 +61,7 @@
                                         <li class="has_submenu active"><a href="{{ url('/') }}">Home</a></li>
                                         <li><a href="collection.html">Classic</a></li>
                                         <li><a href="collection.html">Electric</a></li>
-                                        <li><a href="{{ url('/product') }}">Product</a></li>
+                                        <li><a href="{{ url('/product-show') }}">Product</a></li>
                                         <li><a href="{{ url('/contact') }}">Contact</a></li>
                                     </ul>
                                 </div>
@@ -177,7 +177,7 @@
                                         <li class="has_submenu active"><a href="{{ url('/') }}">Home</a></li>
                                         <li><a href="collection.html">Classic</a></li>
                                         <li><a href="collection.html">Electric</a></li>
-                                        <li><a href="{{ url('/product') }}">Product</a></li>
+                                        <li><a href="{{ url('/product-show') }}">Product</a></li>
                                         <li><a href="{{ url('/contact') }}">Contact</a></li>
                                     </ul>
                                 </div>

@@ -3,7 +3,7 @@
         <div class="product work_porfolio_section wow zoomIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: zoomIn;">
             <div class="product__inner">
                 <div class="product__image">
-                    <img src="http://placehold.it/262x340" alt="images"/>
+                    <img src="{{ asset('storage/' .$product['linkimg']) }}" alt="images" />
                 </div>
                 <div class="product__details">
                     <div class="pe_product_name">
