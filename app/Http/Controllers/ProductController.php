@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -15,21 +16,54 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        // $categories = Category::paginate(100);
         $searchTerm = $request->input('searchTerm');
-
+        $minPrice = $request->input('minPrice');
+        $maxPrice = $request->input('maxPrice');
+        $selectedCategory = $request->input('category_id');
+        $sortBy = $request->input('sortBy', 'id'); // Mặc định sắp xếp theo ID nếu không có giá trị
+        $sortOrder = $request->input('sortOrder', 'asc'); // Mặc định sắp xếp tăng dần nếu không có giá trị
+    
+        $query = Product::query();
+    
+        // Thêm điều kiện tìm kiếm theo tên và mô tả
         if ($searchTerm) {
-            // Nếu có giá trị tìm kiếm, thực hiện truy vấn tìm kiếm
-            $products = Product::where('name', 'like', '%' . $searchTerm . '%')
-                ->orWhere('description', 'like', '%' . $searchTerm . '%')
-                ->paginate(10);
-        } else {
-            // Nếu không có giá trị tìm kiếm, lấy tất cả sản phẩm
-            $products = Product::paginate(10);
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('description', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('distributor', 'like', '%' . $searchTerm . '%');
+            });
         }
-
-        return view('admin.product.index', compact( 'products', 'searchTerm'));
+    
+        // Thêm điều kiện tìm kiếm theo danh mục
+        if ($selectedCategory !== null) {
+            $query->whereHas('category', function ($query) use ($selectedCategory) {
+                $query->where('id', $selectedCategory);
+            });
+        }
+    
+        // Thêm điều kiện tìm kiếm theo khoảng giá
+        if ($minPrice !== null) {
+            $query->where('price', '>=', $minPrice);
+        }
+    
+        if ($maxPrice !== null) {
+            $query->where('price', '<=', $maxPrice);
+        }
+    
+        if ($sortBy === 'price') {
+            $query->orderBy('price', $sortOrder);
+        } else {
+            $query->orderBy($sortBy, $sortOrder);
+        }
+    
+        $categories = Category::all();
+    
+        // Thực hiện truy vấn và lấy dữ liệu phân trang
+        $products = $query->paginate(10);
+    
+        return view('admin.product.index', compact('products', 'searchTerm', 'minPrice', 'maxPrice', 'selectedCategory', 'sortBy', 'sortOrder', 'categories'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -86,21 +120,54 @@ class ProductController extends Controller
      */
     public function show(Request $request)
 {
-    // $categories = Category::paginate(100);
     $searchTerm = $request->input('searchTerm');
+    $minPrice = $request->input('minPrice');
+    $maxPrice = $request->input('maxPrice');
+    $selectedCategory = $request->input('category_id');
+    $sortBy = $request->input('sortBy', 'id'); // Mặc định sắp xếp theo ID nếu không có giá trị
+    $sortOrder = $request->input('sortOrder', 'asc'); // Mặc định sắp xếp tăng dần nếu không có giá trị
 
+    $query = Product::query();
+
+    // Thêm điều kiện tìm kiếm theo tên và mô tả
     if ($searchTerm) {
-        // Nếu có giá trị tìm kiếm, thực hiện truy vấn tìm kiếm
-        $products = Product::where('name', 'like', '%' . $searchTerm . '%')
-            ->orWhere('description', 'like', '%' . $searchTerm . '%')
-            ->paginate(10);
-    } else {
-        // Nếu không có giá trị tìm kiếm, lấy tất cả sản phẩm
-        $products = Product::paginate(10);
+        $query->where(function ($query) use ($searchTerm) {
+            $query->where('name', 'like', '%' . $searchTerm . '%')
+                ->orWhere('description', 'like', '%' . $searchTerm . '%')
+                ->orWhere('distributor', 'like', '%' . $searchTerm . '%');
+        });
     }
 
-    return view('user.product', compact( 'products', 'searchTerm'));
+    // Thêm điều kiện tìm kiếm theo danh mục
+    if ($selectedCategory !== null) {
+        $query->whereHas('category', function ($query) use ($selectedCategory) {
+            $query->where('id', $selectedCategory);
+        });
+    }
+
+    // Thêm điều kiện tìm kiếm theo khoảng giá
+    if ($minPrice !== null) {
+        $query->where('price', '>=', $minPrice);
+    }
+
+    if ($maxPrice !== null) {
+        $query->where('price', '<=', $maxPrice);
+    }
+
+    if ($sortBy === 'price') {
+        $query->orderBy('price', $sortOrder);
+    } else {
+        $query->orderBy($sortBy, $sortOrder);
+    }
+
+    $categories = Category::all();
+
+    // Thực hiện truy vấn và lấy dữ liệu phân trang
+    $products = $query->paginate(10);
+
+    return view('user.product', compact('products', 'searchTerm', 'minPrice', 'maxPrice', 'selectedCategory', 'sortBy', 'sortOrder', 'categories'));
 }
+
 
 
     /**
@@ -124,35 +191,34 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        // $validatedData = $request->validate([
-        //     'name' => 'required'.$id,
-        //     'category_id' => 'required', // Để tránh cập nhật mật khẩu mỗi khi chỉnh sửa
-        //     'distributor' => 'required',
-        //     'price' => 'required',
-        //     'description' => 'required',
-        //     'remain' => 'required',
-            
-        // ]);
-        
-        $product = Product::findOrFail($id);
-        // $categories =  $validatedData['category_id'] === 'Category 1' ? 0 : 1;
-        $imagePath = $request->file('linkimg')->store('images', 'public');
-        
-        $product->update([
-             
-            'name' =>  $request->input('name'),
-            'category_id' => $request->input('category_id'),
-            'distributor' => $request->input('distributor'),
-            'price' => $request->input('price'),
-            'description' => $request->input('description'),
-            'remain' => $request->input('remain'),
-            'linkimg' => $imagePath,
+{
+    $product = Product::findOrFail($id);
+ 
+    if ($request->hasFile('linkimg')) {
+         
+        $currentImagePath = $product->linkimg;
 
-        ]);
-
-        return redirect()->route('product.index')->with('success', 'Product updated successfully!');
+         
+        if (Storage::disk('public')->exists($currentImagePath)) {
+            Storage::disk('public')->delete($currentImagePath);
+        }
+        $newImagePath = $request->file('linkimg')->store('images', 'public');
+        $product->linkimg = $newImagePath;
     }
+
+
+    $product->name = $request->input('name');
+    $product->category_id = $request->input('category_id');
+    $product->distributor = $request->input('distributor');
+    $product->price = $request->input('price');
+    $product->description = $request->input('description');
+    $product->remain = $request->input('remain');
+
+    // Lưu cập nhật
+    $product->save();
+
+    return redirect()->route('product.index')->with('success', 'Product updated successfully!');
+}
 
     /**
      * Remove the specified resource from storage.
