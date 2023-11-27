@@ -5,8 +5,6 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\ShoppingCart;
-use Gloudemans\Shoppingcart\CartItem;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class ProductsTable extends Component
@@ -16,7 +14,7 @@ class ProductsTable extends Component
 
     public function mount()
     {
-        $this->products = Product::all();
+        $this->products = Product::where('remain', '>', 0)->get();
     }
     public function render()
     {
@@ -28,14 +26,12 @@ class ProductsTable extends Component
     {
         if (Auth::check()) {
             $data = [
-                'user_id'=> Auth::id(),
-                'product_id'=>$product_id
+                'user_id' => Auth::id(),
+                'product_id' => $product_id
             ];
             ShoppingCart::updateOrCreate($data);
-            session()->flash('success', 'Product added successfully');
             $this->emit('cart_updated');
-        }
-        else {
+        } else {
             return redirect(route('login'));
         }
     }

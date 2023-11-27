@@ -6,56 +6,64 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Models\ShoppingCart as Cart;
 use App\Models\Order;
+use App\Models\ShoppingCart as ModelsShoppingCart;
 use Illuminate\Support\Facades\DB;
 
 class ShoppingCart extends Component
 {
-    public $cart_items, $sub_total = 0, $total = 0, $tax = 0;
+    public $cart_items, $sub_total = 0;
+    public $message;
+    public $quantity = [];
+    protected $listeners = ['updated_cart_items' => 'render'];
 
     public function mount()
     {
-
         $this->cart_items = Cart::with('product')
             ->where(['user_id' => auth()->user()->id])
             ->get();
+        foreach ($this->cart_items as $item) {
+            $this->quantity[$item->id] = $item->quantity;
+            $this->sub_total += $item->product->price * $item->quantity;
+        }
     }
 
     public function render()
     {
-        $this->total = 0;
-        $this->sub_total = 0;
-        $this->tax = 0;
-        foreach ($this->cart_items as $item) {
-            $this->sub_total += $item->product->price * $item->quantity;
-        }
-        return view('livewire.shopping-cart');
+        return view('livewire.shopping-cart', [
+            'cart_items' => $this->cart_items,
+        ])
+            ->layout('user.layout.master');
     }
 
-    public function incrementQty($id)
+    public function decrementQty($itemId)
     {
-        // dd("Increment quantity");
-        $cart = Cart::whereId($id)->first();
-        $cart->quantity += 1;
-        $cart->save();
-    }
+        $cartItem = Cart::find($itemId);
 
-    public function decrementQty($id)
-    {
-        $cart = Cart::whereId($id)->first();
-        if ($cart->quantity > 1) {
-            $cart->quantity -= 1;
-            $cart->save();
-        } else {
-            return;
+        if ($cartItem && $cartItem->quantity > 1) {
+            $cartItem->decrement('quantity');
+            $this->quantity[$itemId]--;
+            $this->sub_total -= $cartItem->product->price;
         }
     }
 
-    public function removeItem($id)
+    public function incrementQty($itemId)
     {
-        $cart = Cart::whereId($id)->first();
+        $cartItem = Cart::find($itemId);
 
+        if ($cartItem && ($cartItem->product->remain > $this->quantity[$itemId])) {
+            $cartItem->increment('quantity');
+            $this->quantity[$itemId]++;
+            $this->sub_total += $cartItem->product->price;
+        }
+    }
+
+
+    public function removeItem($cartId)
+    {
+        $cart = Cart::find($cartId)->first();
         if ($cart) {
             $cart->delete();
+            // dd($this->cart_items);
             $this->emit('cart_updated');
         }
     }
@@ -66,8 +74,8 @@ class ShoppingCart extends Component
         foreach ($this->cart_items as $item) {
             $product = Product::find($item->product_id);
             if (!$product || $product->remain < $item->quantity) {
-                session()->flash('error', $product->name . ' not enough quantity');
-                return redirect('/cart');
+                $this->message = $product->name . ' is not enough quantity';
+                return;
             }
         }
         try {
@@ -87,14 +95,10 @@ class ShoppingCart extends Component
                     Product::find($item->product_id)->decrement('remain', $item->quantity);
                 }
                 Cart::where('user_id', auth()->id())->delete();
-                session()->flash('success', 'Completed Checkout Processing');
-
-                return redirect('/cart');
+                $this->message = 'Completed Checkout Processing';
             });
         } catch (\Exception $exception) {
-            session()->flash('error', 'Something went wrong');
-
-            return redirect('/cart', compact('message'));
+            $this->message = 'Something went wrong';
         }
     }
 }

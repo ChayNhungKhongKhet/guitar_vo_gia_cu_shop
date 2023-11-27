@@ -19,9 +19,7 @@ Route::get('/checkout', function () {
     return view('user.checkout');
 });
 
-Route::get('/cart', function () {
-    return view('user.cart');
-});
+Route::get('/cart', ShoppingCart::class);
 
 Route::get('/contact', function () {
     return view('user.contact');
