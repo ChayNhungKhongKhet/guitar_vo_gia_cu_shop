@@ -1,20 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Session\Session;
+use App\Models\Cart;
+
 class UserController extends Controller
 {
-    public function showSignup(){
+    public function showSignup()
+    {
         return view('user.home');
     }
-    public function showLogin(){
+    public function showLogin()
+    {
         return view('auth.login');
     }
-      public function login(Request $request)
+    public function login(Request $request)
     {
         $request->validate([
             'username' => 'required',
@@ -65,28 +69,28 @@ class UserController extends Controller
     //     return back()->with('fail', 'The username is not registered');
     // }
     // }
-    public function signup(Request $request){
-         $request -> validate([
+    public function signup(Request $request)
+    {
+        $request->validate([
             'username' => "required|unique:users",
             'email' => "required|email|unique:users",
             'password' => "required|min:5"
-       ]);
-       $user = new User();
-       $user->username = $request->username;
-       $user->email = $request->email;
-       $user->password = $request->password;
-       $user->password = Hash::make($request->password);
-       $res = $user->save();
-       if($res){
-            return back()-> with('success','You have register success');
-       }else{
-            return back()-> with('fail','Something wrong');
-       }
-    }
-    public function logout(){
-        if(Auth::logout()){
-            return redirect(route('login'));
+        ]);
+        $user = new User();
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
+        $res = $user->save();
+        if ($res) {
+            return back()->with('success', 'You have register success');
+        } else {
+            return back()->with('fail', 'Something wrong');
         }
+    }
+    public function logout()
+    {
+        Auth::logout();
         return redirect(route('home'));
     }
     // public function logout(){
@@ -130,7 +134,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required',
             'name' => 'nullable',
@@ -177,10 +181,10 @@ class UserController extends Controller
             'email' => 'required|email',
             'birthday' => 'nullable|date',
         ]);
-        
-        
+
+
         $gender =  $validatedData['gender'] === 'Male' ? 0 : 1;
-        
+
         $user->update([
             // 'username' => $validatedData['username'],
             'name' => $validatedData['name'],
@@ -229,7 +233,7 @@ class UserController extends Controller
         return redirect()->route('profile.change-password')->with('success', 'Password updated successfully');
     }
 
-     public function editProfile()
+    public function editProfile()
     {
         $user = Auth::user();
         return view('user.edit_profile', compact('user'));
@@ -254,7 +258,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'gender' => $request->gender,
-            'address' =>$request->address,
+            'address' => $request->address,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
         ]);

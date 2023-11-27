@@ -17,9 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->double('price');
-            $table->integer('stock_quantity');
+            $table->string('distributor');
+            $table->string('description');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->integer('remain');
+            $table->string('linkimg');
             $table->timestamps();
         });
+
+
     }
 
     /**

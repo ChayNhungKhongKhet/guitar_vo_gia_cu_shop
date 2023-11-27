@@ -6,7 +6,7 @@
                                 <a href="index.html"><img src="/images/header_logo.png" alt="images"></a>
                             </div>
                         </div>
-                
+
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                                         <li class="has_submenu active"><a href="{{ url('/') }}">Home</a></li>
                                         <li><a href="collection.html">Classic</a></li>
                                         <li><a href="collection.html">Electric</a></li>
-                                        <li><a href="{{ url('/product') }}">Product</a></li>
+                                        <li><a href="{{ url('/product-show') }}">Product</a></li>
                                         <li><a href="{{ url('/contact') }}">Contact</a></li>
                                     </ul>
                                 </div>
@@ -70,14 +70,7 @@
                                 <div class="pe_search_cart menu_btn_wrap">
                                     <ul class="display_flex">
                                         <li class="pe_menu_cart pe_cart_open relative">
-                                            <a href="javascript:void(0);">
-                                                <svg style="fill: #fff;" xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="15" viewBox="0 0 16 15">
-                                                    <path
-                                                        d="M4.917,12.143A1.418,1.418,0,1,0,6.3,13.56,1.4,1.4,0,0,0,4.917,12.143Zm7.617,0a1.42,1.42,0,0,0,.092,2.833h0.1a1.375,1.375,0,0,0,.943-0.49,1.447,1.447,0,0,0,.335-1.03,1.415,1.415,0,0,0-.481-0.976A1.346,1.346,0,0,0,12.535,12.144Zm2.792-8.082a0.679,0.679,0,0,0-.578-0.32H7.2a0.707,0.707,0,0,0,0,1.414h6.489L11.8,9.623H5.955L3.762,1.46A0.694,0.694,0,0,0,3.094.94H1.125a0.707,0.707,0,0,0,0,1.414H2.573l2.193,8.162a0.693,0.693,0,0,0,.668.522h6.83a0.692,0.692,0,0,0,.634-0.427L15.383,4.73v0A0.731,0.731,0,0,0,15.327,4.062Z">
-                                                    </path>
-                                                </svg>
-                                            </a>
+                                            @livewire('cart-counter')
                                             <div class="pe_cart_view_wrapper">
                                                 <div class="pe_cart_box">
                                                     <div class="pe_cart_product_info">
@@ -101,7 +94,7 @@
                                                 </div>
                                                 <div class="pe_cart_btn">
                                                     <div class="pe_cart_btn1 pe_btn"><a class="next pull-right"
-                                                            href="cart.html">View Cart</a></div>
+                                                            href="{{ url('/cart') }}">View Cart</a></div>
                                                     <div class="pe_cart_btn1 pe_btn"><a class="next pull-right"
                                                             href="checkout.html">Checkout</a></div>
                                                 </div>
@@ -184,7 +177,7 @@
                                         <li class="has_submenu active"><a href="{{ url('/') }}">Home</a></li>
                                         <li><a href="collection.html">Classic</a></li>
                                         <li><a href="collection.html">Electric</a></li>
-                                        <li><a href="{{ url('/product') }}">Product</a></li>
+                                        <li><a href="{{ url('/product-show') }}">Product</a></li>
                                         <li><a href="{{ url('/contact') }}">Contact</a></li>
                                     </ul>
                                 </div>
@@ -193,14 +186,7 @@
                                 <div class="pe_search_cart menu_btn_wrap">
                                     <ul class="display_flex">
                                         <li class="pe_menu_cart pe_cart_open relative">
-                                            <a href="javascript:void(0);">
-                                                <svg style="fill: #fff;" xmlns="http://www.w3.org/2000/svg"
-                                                    width="16" height="15" viewBox="0 0 16 15">
-                                                    <path
-                                                        d="M4.917,12.143A1.418,1.418,0,1,0,6.3,13.56,1.4,1.4,0,0,0,4.917,12.143Zm7.617,0a1.42,1.42,0,0,0,.092,2.833h0.1a1.375,1.375,0,0,0,.943-0.49,1.447,1.447,0,0,0,.335-1.03,1.415,1.415,0,0,0-.481-0.976A1.346,1.346,0,0,0,12.535,12.144Zm2.792-8.082a0.679,0.679,0,0,0-.578-0.32H7.2a0.707,0.707,0,0,0,0,1.414h6.489L11.8,9.623H5.955L3.762,1.46A0.694,0.694,0,0,0,3.094.94H1.125a0.707,0.707,0,0,0,0,1.414H2.573l2.193,8.162a0.693,0.693,0,0,0,.668.522h6.83a0.692,0.692,0,0,0,.634-0.427L15.383,4.73v0A0.731,0.731,0,0,0,15.327,4.062Z">
-                                                    </path>
-                                                </svg>
-                                            </a>
+                                            @livewire('cart-counter')
                                             <div class="pe_cart_view_wrapper">
                                                 <div class="pe_cart_box">
                                                     <div class="pe_cart_product_info">
@@ -224,9 +210,9 @@
                                                 </div>
                                                 <div class="pe_cart_btn">
                                                     <div class="pe_cart_btn1 pe_btn"><a class="next pull-right"
-                                                            href="cart.html">View Cart</a></div>
+                                                            href="{{ url('cart') }}">View Cart</a></div>
                                                     <div class="pe_cart_btn1 pe_btn"><a class="next pull-right"
-                                                            href="checkout.html">Checkout</a></div>
+                                                            href="{{ url('/checkout') }}">Checkout</a></div>
                                                 </div>
                                             </div>
                                         </li>
