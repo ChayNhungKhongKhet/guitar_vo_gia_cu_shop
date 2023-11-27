@@ -47,11 +47,16 @@
             <label for="remain">Remain</label>
             <input name="remain" type="text" class="form-control" value="{{ $product->remain  }}" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="linkimg">Img</label>
             <input type="file" name="linkimg" class="form-control-file"  id="exampleFormControlFile1" onchange="previewImage(this)">
              
-        </div>     
+        </div>      -->
+        <div class="form-group">
+            <label for="linkimg">Img</label>
+            <input type="file" name="linkimg" class="form-control-file" id="exampleFormControlFile1" onchange="previewImage(this)">
+            <img id="previewImage" src="{{ asset('storage/' . $product->linkimg) }}" alt="Current Image" style="max-width: 200px; max-height: 200px;">
+        </div>
     </div>
     <div class="btn-control">
         <button type="submit" class="btn btn-success btn-update">Update</button>
@@ -59,5 +64,26 @@
    
 </form>
 </div>
- 
+<script>
+    function previewImage(input) {
+        var preview = document.getElementById('previewImage');
+        var file = input.files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "{{ asset('storage/' . $product->linkimg) }}"; // Nếu không có tệp mới, hiển thị ảnh cũ
+        }
+    }
+
+    // Sự kiện 'input' trên trường input file
+    document.querySelector('input[name="linkimg"]').addEventListener('input', function(event) {
+        previewImage(event.target);
+    });
+</script>
 @endsection

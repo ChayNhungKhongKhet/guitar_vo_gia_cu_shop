@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Http\Controllers; 
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Session\Session;
+use App\Models\Cart;
+
 class UserController extends Controller
 {
-    public function showSignup(){
-        return view('home');
+    public function showSignup()
+    {
+        return view('user.home');
     }
-    public function showLogin(){
-        return view('login');
+    public function showLogin()
+    {
+        return view('auth.login');
     }
-      public function login(Request $request)
+    public function login(Request $request)
     {
         $request->validate([
             'username' => 'required',
@@ -58,32 +62,61 @@ class UserController extends Controller
     //     return back()->with('fail', 'The username is not registered');
     // }
     // }
-    public function signup(Request $request){
-         $request -> validate([
+    public function signup(Request $request)
+    {
+        $request->validate([
             'username' => "required|unique:users",
             'email' => "required|email|unique:users",
             'password' => "required|min:5"
-       ]);
-       $user = new User();
-       $user->username = $request->username;
-       $user->email = $request->email;
-       $user->password = $request->password;
-       $user->password = Hash::make($request->password);
-       $res = $user->save();
-       if($res){
-            return back()-> with('success','You have register success');
-       }else{
-            return back()-> with('fail','Something wrong');
-       }
+        ]);
+        $user = new User();
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
+        $res = $user->save();
+        if ($res) {
+            return back()->with('success', 'You have register success');
+        } else {
+            return back()->with('fail', 'Something wrong');
+        }
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('home'));
     }
     // public function logout(){
 
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
-        // dd($users);
+        $query = User::query();
+
+        $searchTerm = $request->input('searchTerm');
+        if ($searchTerm) {
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('username', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('name', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        if ($request->has('searchUsername')) {
+            $query->Where('username', 'like', '%' . $searchTerm . '%');
+        }
+
+        if ($request->has('searchName')) {
+            $query->Where('name', 'like', '%' . $searchTerm . '%');
+        }
+
+        $searchGender = $request->input('searchGender');
+        if ($searchGender) {
+            $query->where('gender', $searchGender == 'Male' ? 0 : 1);
+        }
+
+        $users = $query->where('status', 1)->paginate(10);
+
         return view('admin.account.index', compact('users'));
     }
 
@@ -94,7 +127,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-         $request->validate([
+        $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required',
             'name' => 'required',
@@ -103,7 +136,7 @@ class UserController extends Controller
             'phone' => 'required',
             'email' => 'required|email',
             'birthday' => 'required',
-            
+
         ]);
 
         $gender = $request->input('gender') === 'Male' ? 0 : 1;
@@ -111,8 +144,8 @@ class UserController extends Controller
         User::create([
             'username' => $request->input('username'),
             //băm mật khẩu
-            // 'password' => Hash::make($request->input('password')),
-            'password' => $request->input('password'),
+            'password' => Hash::make($request->input('password')),
+            // 'password' => $request->input('password'),
             'name' => $request->input('name'),
             'gender' => $gender,
             'address' => $request->input('address'),
@@ -132,9 +165,9 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $validatedData = $request->validate([
-            'username' => 'required|unique:users,username,'.$id,
-            'password' => 'nullable', // Để tránh cập nhật mật khẩu mỗi khi chỉnh sửa
             'name' => 'required',
             'gender' => 'required',
             'address' => 'required',
@@ -142,13 +175,12 @@ class UserController extends Controller
             'email' => 'required|email',
             'birthday' => 'required|date',
         ]);
-        
-        $user = User::findOrFail($id);
+
+
         $gender =  $validatedData['gender'] === 'Male' ? 0 : 1;
 
-        
         $user->update([
-            'username' => $validatedData['username'],
+            // 'username' => $validatedData['username'],
             'name' => $validatedData['name'],
             'gender' => $gender,
             'address' => $validatedData['address'],
@@ -156,6 +188,7 @@ class UserController extends Controller
             'email' => $validatedData['email'],
             'birthday' => $validatedData['birthday'],
         ]);
+        $user->save();
 
         return redirect()->route('account.index')->with('success', 'Account updated successfully!');
     }
@@ -163,7 +196,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $user->delete();
+        $user->update(['status' => 0]);
         return redirect()->route('account.index')->with('success', 'Account deleted successfully!');
     }
     public function showChangePasswordForm()
@@ -194,7 +227,7 @@ class UserController extends Controller
         return redirect()->route('profile.change-password')->with('success', 'Password updated successfully');
     }
 
-     public function editProfile()
+    public function editProfile()
     {
         $user = Auth::user();
         return view('user.edit_profile', compact('user'));
@@ -219,7 +252,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'gender' => $request->gender,
-            'address' =>$request->address,
+            'address' => $request->address,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
         ]);

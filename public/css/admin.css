@@ -1,0 +1,5 @@
+
+.chartColumn {
+    transition: opacity 10s ease-in-out; /* Thêm hiệu ứng transition */
+    /* CSS khác của bảng */
+  }
