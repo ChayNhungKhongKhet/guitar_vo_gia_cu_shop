@@ -6,7 +6,7 @@
                                 <a href="index.html"><img src="/images/header_logo.png" alt="images"></a>
                             </div>
                         </div>
-                
+
                     </div>
                 </div>
             </div>
@@ -71,10 +71,8 @@
                                 <ul class="display_flex">
                                     <li class="pe_menu_cart pe_cart_open relative">
                                         <a href="javascript:void(0);">
-                                            <svg style="fill: #fff;" xmlns="http://www.w3.org/2000/svg" width="16"
-                                                height="15" viewBox="0 0 16 15">
-                                                <path
-                                                    d="M4.917,12.143A1.418,1.418,0,1,0,6.3,13.56,1.4,1.4,0,0,0,4.917,12.143Zm7.617,0a1.42,1.42,0,0,0,.092,2.833h0.1a1.375,1.375,0,0,0,.943-0.49,1.447,1.447,0,0,0,.335-1.03,1.415,1.415,0,0,0-.481-0.976A1.346,1.346,0,0,0,12.535,12.144Zm2.792-8.082a0.679,0.679,0,0,0-.578-0.32H7.2a0.707,0.707,0,0,0,0,1.414h6.489L11.8,9.623H5.955L3.762,1.46A0.694,0.694,0,0,0,3.094.94H1.125a0.707,0.707,0,0,0,0,1.414H2.573l2.193,8.162a0.693,0.693,0,0,0,.668.522h6.83a0.692,0.692,0,0,0,.634-0.427L15.383,4.73v0A0.731,0.731,0,0,0,15.327,4.062Z">
+                                            <svg style="fill: #fff;" xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15">
+                                                <path d="M4.917,12.143A1.418,1.418,0,1,0,6.3,13.56,1.4,1.4,0,0,0,4.917,12.143Zm7.617,0a1.42,1.42,0,0,0,.092,2.833h0.1a1.375,1.375,0,0,0,.943-0.49,1.447,1.447,0,0,0,.335-1.03,1.415,1.415,0,0,0-.481-0.976A1.346,1.346,0,0,0,12.535,12.144Zm2.792-8.082a0.679,0.679,0,0,0-.578-0.32H7.2a0.707,0.707,0,0,0,0,1.414h6.489L11.8,9.623H5.955L3.762,1.46A0.694,0.694,0,0,0,3.094.94H1.125a0.707,0.707,0,0,0,0,1.414H2.573l2.193,8.162a0.693,0.693,0,0,0,.668.522h6.83a0.692,0.692,0,0,0,.634-0.427L15.383,4.73v0A0.731,0.731,0,0,0,15.327,4.062Z">
                                                 </path>
                                             </svg>
                                         </a>
@@ -84,31 +82,27 @@
                                                     <h5>Dummy Product Name</h5>
                                                     1X$40.00
                                                 </div>
-                                                <div class="pe_cart_product_img"><img src="/images/cart_img2.jpg"
-                                                        alt="cart thumbnail" class="img-fluid"></div>
+                                                <div class="pe_cart_product_img"><img src="/images/cart_img2.jpg" alt="cart thumbnail" class="img-fluid"></div>
                                             </div>
                                             <div class="pe_cart_box">
                                                 <div class="pe_cart_product_info">
                                                     <h5>Dummy Product Name</h5>
                                                     1X$60.00
                                                 </div>
-                                                <div class="pe_cart_product_img"><img src="/images/cart_img1.jpg"
-                                                        alt="cart thumbnail" class="img-fluid"></div>
+                                                <div class="pe_cart_product_img"><img src="/images/cart_img1.jpg" alt="cart thumbnail" class="img-fluid"></div>
                                             </div>
                                             <div class="pe_cart_product_total">
                                                 <h3>Total</h3>
                                                 <h3>$100.00</h3>
                                             </div>
                                             <div class="pe_cart_btn">
-                                                <div class="pe_cart_btn1 pe_btn"><a class="next pull-right"
-                                                        href="cart.html">View Cart</a></div>
-                                                <div class="pe_cart_btn1 pe_btn"><a class="next pull-right"
-                                                        href="checkout.html">Checkout</a></div>
+                                                <div class="pe_cart_btn1 pe_btn"><a class="next pull-right" href="cart.html">View Cart</a></div>
+                                                <div class="pe_cart_btn1 pe_btn"><a class="next pull-right" href="checkout.html">Checkout</a></div>
                                             </div>
                                         </div>
                                     </li>
                                     {{-- @if( ) --}}
-                                        {{-- <li class="pe_user_form_wrapper">
+                                    {{-- <li class="pe_user_form_wrapper">
                                         <a id="show" href="javascript:void(0);">
                                             <svg id="userIcon" style="fill: #fff;" xmlns="http://www.w3.org/2000/svg"
                                                 width="15" height="15" viewBox="0 0 15 15">
@@ -136,61 +130,54 @@
                                                                 action="/signupPost">
                                                                 @if (Session::has('success'))
                                                                     <div class="alert alert-success">
-                                                                        {{ Session::get('success') }}</div>
-                                                                @endif
-                                                                @if (Session::has('fail'))
-                                                                    <div class="alert alert-danger">
-                                                                        {{ Session::get('fail') }}</div>
-                                                                @endif
-                                                                @csrf
-                                                                <div class="form-group">
-                                                                    <input type="email" class="input"
-                                                                        id="user_email" autocomplete="off"
-                                                                        placeholder="Email" name="email"
-                                                                        value="{{ old('email') }}">
-                                                                    <span class="text-danger">
-                                                                        @error('email')
-                                                                            {{ $message }}
-                                                                        @enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="text" class="input"
-                                                                        id="user_name" autocomplete="off"
-                                                                        placeholder="Username" name="username"
-                                                                        value="{{ old('username') }}">
-                                                                    <span class="text-danger">
-                                                                        @error('username')
-                                                                            {{ $message }}
-                                                                        @enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="password" class="input"
-                                                                        autocomplete="off" placeholder="Password"
-                                                                        name="password">
-                                                                    <span class="text-danger">
-                                                                        @error('password')
-                                                                            {{ $message }}
-                                                                        @enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="submit" class="button"
-                                                                        value="Sign Up">
-                                                                </div>
+                                                                        {{ Session::get('success') }}
+                            </div>
+                            @endif
+                            @if (Session::has('fail'))
+                            <div class="alert alert-danger">
+                                {{ Session::get('fail') }}
+                            </div>
+                            @endif
+                            @csrf
+                            <div class="form-group">
+                                <input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email" name="email" value="{{ old('email') }}">
+                                <span class="text-danger">
+                                    @error('email')
+                                    {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="input" id="user_name" autocomplete="off" placeholder="Username" name="username" value="{{ old('username') }}">
+                                <span class="text-danger">
+                                    @error('username')
+                                    {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="input" autocomplete="off" placeholder="Password" name="password">
+                                <span class="text-danger">
+                                    @error('password')
+                                    {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="button" value="Sign Up">
+                            </div>
 
-                                                            </form>
-                                                            <!--.login-form-->
-                                                            <div class="help-text">
-                                                                <p>By signing up, you agree to our</p>
-                                                                <p><a href="#">Terms of service</a></p>
-                                                            </div>
-                                                            <!--.help-text-->
-                                                        </div>
-                                                        <!--.signup-tab-content-->
-                                                    </div>
-                                                    {{-- <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            </form>
+                            <!--.login-form-->
+                            <div class="help-text">
+                                <p>By signing up, you agree to our</p>
+                                <p><a href="#">Terms of service</a></p>
+                            </div>
+                            <!--.help-text-->
+                        </div>
+                        <!--.signup-tab-content-->
+                    </div>
+                    {{-- <div class="tab-pane" id="tabs-2" role="tabpanel">
                                                         <div id="login-tab-content">
                                                             <form class="login-form" method="post">
                                                                 <input type="text" class="input" id="user_login"
@@ -211,110 +198,99 @@
                                                         </div>
                                                         <!--.login-tab-content-->
                                                     </div> --}}
-                                                {{-- </div>
+                    {{-- </div>
                                             </div>
                                             <!--.form-wrap-->
                                         </div> --}}
-                                    {{-- </li> --}}
-                                    {{-- @endif --}}
-                                     <li class="pe_user_form_wrapper">
-                                        <a id="show" href="javascript:void(0);">
-                                            <svg id="userIcon" style="fill: #fff;" xmlns="http://www.w3.org/2000/svg"
-                                                width="15" height="15" viewBox="0 0 15 15">
-                                                <path
-                                                    d="M14.253,14.581A7.1,7.1,0,0,0,10.2,9.389a4.735,4.735,0,1,0-5.81.007A7.26,7.26,0,0,0,.323,14.58l-0.06.318H1.915l0.045-.212A5.407,5.407,0,0,1,7.288,10.4a5.407,5.407,0,0,1,5.327,4.29L12.66,14.9h1.651ZM7.288,2.517A3.109,3.109,0,1,1,4.2,5.627,3.1,3.1,0,0,1,7.288,2.517Z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <div class="pe_user_form" style="display: none;">
-                                            <div class="form-wrap">
-                                                <div id="hide" class="bg-overlay">
-                                                    <a href="javascript:;"><i class="fa fa-times"></i></a>
-                                                </div>
-                                                <ul class="nav nav-tabs" role="tablist">
-                                                    <li class="nav-item"><a class="nav-link active" data-toggle="tab"
-                                                            href="#tabs-1" role="tab">Sign Up</a></li>
-                                                    <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                            href="/login" role="tab">Login</a></li>
-                                                </ul>                 
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                                        <div id="signup-tab-content" class="active">
-                                                            <form class="signup-form" method="post"
-                                                                action="/signupPost">
-                                                                @if (Session::has('success'))
-                                                                    <div class="alert alert-success">
-                                                                        {{ Session::get('success') }}</div>
-                                                                @endif
-                                                                @if (Session::has('fail'))
-                                                                    <div class="alert alert-danger">
-                                                                        {{ Session::get('fail') }}</div>
-                                                                @endif
-                                                                @csrf
-                                                                <div class="form-group">
-                                                                    <input type="email" class="input"
-                                                                        id="user_email" autocomplete="off"
-                                                                        placeholder="Email" name="email"
-                                                                        value="{{ old('email') }}">
-                                                                    <span class="text-danger">
-                                                                        @error('email')
-                                                                            {{ $message }}
-                                                                        @enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="text" class="input"
-                                                                        id="user_name" autocomplete="off"
-                                                                        placeholder="Username" name="username"
-                                                                        value="{{ old('username') }}">
-                                                                    <span class="text-danger">
-                                                                        @error('username')
-                                                                            {{ $message }}
-                                                                        @enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="password" class="input"
-                                                                        autocomplete="off" placeholder="Password"
-                                                                        name="password">
-                                                                    <span class="text-danger">
-                                                                        @error('password')
-                                                                            {{ $message }}
-                                                                        @enderror
-                                                                    </span>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="submit" class="button"
-                                                                        value="Sign Up">
-                                                                </div>
-                                                            </form>
-                                                            <div class="help-text">
-                                                                <p>By signing up, you agree to our</p>
-                                                                <p><a href="#">Terms of service</a></p>
-                                                            </div>                                        
-                                                        </div>                       
-                                                    </div>                                                
-                                                </div>
-                                            </div>                                        
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="menu_btn"> <span></span> <span></span>
-                                            <span></span> </a>
-                                    </li>
+                    {{-- </li> --}}
+                    {{-- @endif --}}
+                    <li class="pe_user_form_wrapper">
+                        <a id="show" href="javascript:void(0);">
+                            <svg id="userIcon" style="fill: #fff;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+                                <path d="M14.253,14.581A7.1,7.1,0,0,0,10.2,9.389a4.735,4.735,0,1,0-5.81.007A7.26,7.26,0,0,0,.323,14.58l-0.06.318H1.915l0.045-.212A5.407,5.407,0,0,1,7.288,10.4a5.407,5.407,0,0,1,5.327,4.29L12.66,14.9h1.651ZM7.288,2.517A3.109,3.109,0,1,1,4.2,5.627,3.1,3.1,0,0,1,7.288,2.517Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <div class="pe_user_form" style="display: none;">
+                            <div class="form-wrap">
+                                <div id="hide" class="bg-overlay">
+                                    <a href="javascript:;"><i class="fa fa-times"></i></a>
+                                </div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Sign Up</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="/login" role="tab">Login</a></li>
                                 </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                        <div id="signup-tab-content" class="active">
+                                            <form class="signup-form" method="post" action="/signupPost">
+                                                @if (Session::has('success'))
+                                                <div class="alert alert-success">
+                                                    {{ Session::get('success') }}
+                                                </div>
+                                                @endif
+                                                @if (Session::has('fail'))
+                                                <div class="alert alert-danger">
+                                                    {{ Session::get('fail') }}
+                                                </div>
+                                                @endif
+                                                @csrf
+                                                <div class="form-group">
+                                                    <input type="email" class="input" id="user_email" autocomplete="off" placeholder="Email" name="email" value="{{ old('email') }}">
+                                                    <span class="text-danger">
+                                                        @error('email')
+                                                        {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="input" id="user_name" autocomplete="off" placeholder="Username" name="username" value="{{ old('username') }}">
+                                                    <span class="text-danger">
+                                                        @error('username')
+                                                        {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="input" autocomplete="off" placeholder="Password" name="password">
+                                                    <span class="text-danger">
+                                                        @error('password')
+                                                        {{ $message }}
+                                                        @enderror
+                                                    </span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" class="button" value="Sign Up">
+                                                </div>
+                                            </form>
+                                            <div class="help-text">
+                                                <p>By signing up, you agree to our</p>
+                                                <p><a href="#">Terms of service</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu_btn"> <span></span> <span></span>
+                            <span></span> </a>
+                    </li>
+                    </ul>
+                </div>
+                </div>
+                </div>
                 </div>
             </header>
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script>
                 function loginSuccess(username) {
                     if (username != null) {
-                    $('#userIcon').attr('viewBox', '0 0 24 24');
-                    $('#userIcon path').attr('d', 'M2 21h20v-2H2v2zm0-6h20v-2H2v2zm0-8v2h20V7H2zm0-2h20V3H2zm0 12h20v-2H2v2z');
-                    $('#show').html('<span>Welcome, ' + username +
-                    '</span> | <a href="javascript:void(0);" onclick="logout()">Logout</a>');
+                        $('#userIcon').attr('viewBox', '0 0 24 24');
+                        $('#userIcon path').attr('d', 'M2 21h20v-2H2v2zm0-6h20v-2H2v2zm0-8v2h20V7H2zm0-2h20V3H2zm0 12h20v-2H2v2z');
+                        $('#show').html('<span>Welcome, ' + username +
+                            '</span> | <a href="javascript:void(0);" onclick="logout()">Logout</a>');
+                    }
                 }
             </script>
