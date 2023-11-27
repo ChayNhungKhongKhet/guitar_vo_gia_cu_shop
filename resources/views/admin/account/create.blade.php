@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label>Name</label>
-                <input name="name" type="text" class="form-control" required>
+                <input name="name" type="text" class="form-control" >
             </div>
             <div class="form-group">
                 <label>Gender</label>
@@ -30,11 +30,11 @@
                 
             <div class="form-group">
                 <label>Address</label>
-                <input name="address" type="text" class="form-control" required>
+                <input name="address" type="text" class="form-control" >
             </div>
             <div class="form-group">
                 <label>Phone</label>
-                <input name="phone" type="text" class="form-control" required>
+                <input name="phone" type="text" class="form-control" >
             </div>
             <div class="form-group">
                 <label>Email</label>
@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label>Birthday</label>
-                <input name="birthday" type="date" class="form-control" required>
+                <input name="birthday" type="date" class="form-control" >
             </div>
 
         </div>

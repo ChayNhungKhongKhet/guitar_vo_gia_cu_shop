@@ -63,7 +63,7 @@
                         $counter = 1
                     @endphp
                     @foreach ($users as $user)
-                        @if ($user->status == 1)
+                        @if ($user->status == 1 && $user->is_Admin == 1)
                             <tr>
                                 <td>{{ $counter }}</td>
                                 <td>{{ $user->id }}</td>

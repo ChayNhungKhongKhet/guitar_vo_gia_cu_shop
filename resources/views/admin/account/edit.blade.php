@@ -10,15 +10,15 @@
     <div class="card-body">					
         <div class="form-group">
             <label for="username">UserName</label>
-            <input name="username" type="text" class="form-control" value="{{$user->username }}" disabled required>
+            <input name="username" type="text" class="form-control" value="{{$user->username }}" disabled >
         </div>
         <!-- <div class="form-group">
             <label for="password">Password</label>
-            <input name="password" type="password" class="form-control" value="{{ $user->password }}" disabled required>
+            <input name="password" type="password" class="form-control" value="{{ $user->password }}" disabled >
         </div> -->
         <div class="form-group">
             <label for="name">Name</label>
-            <input name="name" type="text" class="form-control" value="{{$user->name}}" required>
+            <input name="name" type="text" class="form-control" value="{{$user->name}}" >
         </div>
         <div class="form-group">
             <label for="gender">Gender</label>
@@ -31,19 +31,19 @@
             
         <div class="form-group">
             <label for="address">Address</label>
-            <input name="address" type="text" class="form-control" value="{{ $user->address }}" required>
+            <input name="address" type="text" class="form-control" value="{{ $user->address }}" >
         </div>
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input name="phone" type="text" class="form-control" value="{{ $user->phone }}" required>
+            <input name="phone" type="text" class="form-control" value="{{ $user->phone }}" >
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input name="email" type="email" class="form-control" value="{{ $user->email }}" required>
+            <input name="email" type="email" class="form-control" value="{{ $user->email }}" >
         </div>
         <div class="form-group">
             <label for="birthday">Birthday</label>
-            <input name="birthday" type="date" class="form-control" value="{{ $user->birthday }}" required>
+            <input name="birthday" type="date" class="form-control" value="{{ $user->birthday }}" >
         </div>
 
     </div>

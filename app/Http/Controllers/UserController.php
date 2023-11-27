@@ -25,9 +25,16 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $user = Auth::user();
+
+            // Check if the account is locked
+            if ($user->status == 0) {
+                Auth::logout();
+                return back()->withErrors(['username' => 'This account has been locked']);
+            }
 
             // Nếu đăng nhập thành công, kiểm tra nếu người dùng là admin
-            if (Auth::user()->is_Admin == 0) {
+            if ($user->is_Admin == 0) {
                 return redirect('/admin');
             } else {
                 return redirect(route('home'));
@@ -126,12 +133,12 @@ class UserController extends Controller
          $request->validate([
             'username' => 'required|unique:users',
             'password' => 'required',
-            'name' => 'required',
-            'gender' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
+            'name' => 'nullable',
+            'gender' => 'nullable',
+            'address' => 'nullable',
+            'phone' => 'nullable',
             'email' => 'required|email',
-            'birthday' => 'required',
+            'birthday' => 'nullable',
             
         ]);
 
@@ -141,7 +148,6 @@ class UserController extends Controller
             'username' => $request->input('username'),
             //băm mật khẩu
             'password' => Hash::make($request->input('password')),
-            // 'password' => $request->input('password'),
             'name' => $request->input('name'),
             'gender' => $gender,
             'address' => $request->input('address'),
@@ -164,12 +170,12 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $validatedData = $request->validate([
-            'name' => 'required',
+            'name' => 'nullable',
             'gender' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
+            'address' => 'nullable',
+            'phone' => 'nullable',
             'email' => 'required|email',
-            'birthday' => 'required|date',
+            'birthday' => 'nullable|date',
         ]);
         
         
